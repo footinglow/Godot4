@@ -1,0 +1,44 @@
+[gd_scene load_steps=4 format=3 uid="uid://bnol0vm6n7q4c"]
+
+[sub_resource type="BoxMesh" id="BoxMesh_pcj8m"]
+size = Vector3(1, 0.5, 1)
+
+[sub_resource type="CylinderMesh" id="CylinderMesh_cpe1g"]
+top_radius = 0.2
+bottom_radius = 0.2
+height = 1.0
+
+[sub_resource type="SphereMesh" id="SphereMesh_tfgs8"]
+radius = 0.1
+height = 0.2
+
+[node name="Node3D" type="Node3D"]
+
+[node name="Node3D_Palayer_01" type="Node3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -1, 0, 0)
+
+[node name="MeshInstance3D_Body" type="MeshInstance3D" parent="Node3D_Palayer_01"]
+mesh = SubResource("BoxMesh_pcj8m")
+
+[node name="MeshInstance3D_Gun" type="MeshInstance3D" parent="Node3D_Palayer_01"]
+transform = Transform3D(1, 0, 0, 0, -4.37114e-08, -1, 0, 1, -4.37114e-08, 0, 0, -0.74849)
+mesh = SubResource("CylinderMesh_cpe1g")
+
+[node name="MeshInstance3D_Bullet" type="MeshInstance3D" parent="Node3D_Palayer_01"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -2.47693)
+mesh = SubResource("SphereMesh_tfgs8")
+
+[node name="Node3D_Palayer_02" type="Node3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1, 0, 0)
+
+[node name="MeshInstance3D_Body" type="MeshInstance3D" parent="Node3D_Palayer_02"]
+mesh = SubResource("BoxMesh_pcj8m")
+
+[node name="MeshInstance3D_Gun" type="MeshInstance3D" parent="Node3D_Palayer_02"]
+transform = Transform3D(1, 0, 0, 0, -4.37114e-08, -1, 0, 1, -4.37114e-08, 0, 0, -0.74849)
+mesh = SubResource("CylinderMesh_cpe1g")
+
+[node name="MeshInstance3D_Bullet" type="MeshInstance3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1, 0, -2.47693)
+mesh = SubResource("SphereMesh_tfgs8")
+skeleton = NodePath("../Node3D_Palayer_02")

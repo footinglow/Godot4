@@ -1,0 +1,19 @@
+[gd_scene load_steps=3 format=3 uid="uid://cv2yj6ys20gsd"]
+
+[ext_resource type="Script" path="res://Area3D.gd" id="1_jf6lr"]
+
+[sub_resource type="BoxMesh" id="BoxMesh_gfo6a"]
+
+[node name="Node3D" type="Node3D"]
+
+[node name="Area3D" type="Area3D" parent="."]
+script = ExtResource("1_jf6lr")
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="Area3D"]
+mesh = SubResource("BoxMesh_gfo6a")
+
+[node name="Camera3D" type="Camera3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 6.19257)
+
+[node name="DirectionalLight3D" type="DirectionalLight3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 0.688557, 0.725182, 0, -0.725182, 0.688557, 0, 1.89902, 2.94668)
