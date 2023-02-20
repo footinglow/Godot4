@@ -1,8 +1,8 @@
-[gd_scene load_steps=2 format=3 uid="uid://dbuuho3p3nduo"]
+[gd_scene load_steps=2 format=3 uid="uid://hdxgc0m3i8v6"]
 
 [sub_resource type="SphereMesh" id="SphereMesh_76acp"]
 
-[node name="World" type="Node3D"]
+[node name="world_coord" type="Node3D"]
 
 [node name="MeshInstance3D" type="MeshInstance3D" parent="."]
 mesh = SubResource("SphereMesh_76acp")

@@ -10,8 +10,8 @@ config_version=5
 
 [application]
 
-config/name="01_Simple3D"
-run/main_scene="res://world.tscn"
+config/name="S01_Simple3D"
+run/main_scene="res://world_coord.tscn"
 config/features=PackedStringArray("4.0", "Mobile")
 config/icon="res://icon.svg"
 
