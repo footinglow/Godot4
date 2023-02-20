@@ -45,21 +45,21 @@ transform = Transform3D(1, 0, 0, 0, -4.37114e-08, -1, 0, 1, -4.37114e-08, 0, 0, 
 mesh = SubResource("CylinderMesh_i8aei")
 skeleton = NodePath("")
 
-[node name="Node3D_SnowMan_02" type="Node3D" parent="Node3D_SnowMan_02"]
+[node name="Node3D_SnowMan_03" type="Node3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1, 0, 0)
 
-[node name="MeshInstance3D_Body" type="MeshInstance3D" parent="Node3D_SnowMan_02/Node3D_SnowMan_02"]
+[node name="MeshInstance3D_Body" type="MeshInstance3D" parent="Node3D_SnowMan_03"]
 mesh = SubResource("SphereMesh_id4q5")
-skeleton = NodePath("../../Node3D_SnowMan_02")
+skeleton = NodePath("../../Node3D_SnowMan_03")
 
-[node name="MeshInstance3D_Head" type="MeshInstance3D" parent="Node3D_SnowMan_02/Node3D_SnowMan_02/MeshInstance3D_Body"]
+[node name="MeshInstance3D_Head" type="MeshInstance3D" parent="Node3D_SnowMan_03/MeshInstance3D_Body"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.75, 0)
 mesh = SubResource("SphereMesh_oml4p")
 skeleton = NodePath("")
 
-[node name="Node" type="Node" parent="Node3D_SnowMan_02/Node3D_SnowMan_02/MeshInstance3D_Body/MeshInstance3D_Head"]
+[node name="Node" type="Node" parent="Node3D_SnowMan_03/MeshInstance3D_Body/MeshInstance3D_Head"]
 
-[node name="MeshInstance3D_Nose" type="MeshInstance3D" parent="Node3D_SnowMan_02/Node3D_SnowMan_02/MeshInstance3D_Body/MeshInstance3D_Head/Node"]
+[node name="MeshInstance3D_Nose" type="MeshInstance3D" parent="Node3D_SnowMan_03/MeshInstance3D_Body/MeshInstance3D_Head/Node"]
 transform = Transform3D(1, 0, 0, 0, -4.37114e-08, -1, 0, 1, -4.37114e-08, 1, 0.75, 0.5)
 mesh = SubResource("CylinderMesh_i8aei")
 skeleton = NodePath("")
