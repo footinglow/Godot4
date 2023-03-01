@@ -1,0 +1,24 @@
+[gd_scene load_steps=4 format=3 uid="uid://xr3v2o5feouc"]
+
+[ext_resource type="Script" path="res://Player.gd" id="1_w4jg0"]
+
+[sub_resource type="SphereMesh" id="SphereMesh_ggemk"]
+
+[sub_resource type="SphereShape3D" id="SphereShape3D_j8g1l"]
+
+[node name="global" type="Node3D"]
+
+[node name="Camera3D" type="Camera3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 0.5, 0.866025, 0, -0.866025, 0.5, 0, 7, 0)
+
+[node name="DirectionalLight3D" type="DirectionalLight3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -10, 0, 0)
+
+[node name="Player" type="CharacterBody3D" parent="."]
+script = ExtResource("1_w4jg0")
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="Player"]
+mesh = SubResource("SphereMesh_ggemk")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Player"]
+shape = SubResource("SphereShape3D_j8g1l")
