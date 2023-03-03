@@ -10,6 +10,7 @@ height = 0.5
 [node name="Bullet" type="CharacterBody3D"]
 collision_layer = 8
 collision_mask = 13
+wall_min_slide_angle = 0.0
 script = ExtResource("1_gvivr")
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="."]
