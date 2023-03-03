@@ -1,0 +1,80 @@
+[gd_scene load_steps=11 format=3 uid="uid://3kkl2mo56isc"]
+
+[ext_resource type="Script" path="res://Player.gd" id="1_w4jg0"]
+[ext_resource type="PackedScene" uid="uid://64waoercm2v6" path="res://bullet.tscn" id="2_ktegy"]
+[ext_resource type="PackedScene" uid="uid://bapy5h4vk8kkv" path="res://enemy.tscn" id="3_gxo67"]
+[ext_resource type="PackedScene" uid="uid://c721jieefrmmw" path="res://Visual/visual_player.tscn" id="3_igkmx"]
+
+[sub_resource type="CylinderShape3D" id="CylinderShape3D_em1v6"]
+height = 0.6
+radius = 0.2
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_sjd76"]
+albedo_color = Color(0.4, 0.580392, 0.0705882, 1)
+
+[sub_resource type="BoxMesh" id="BoxMesh_heg0l"]
+material = SubResource("StandardMaterial3D_sjd76")
+size = Vector3(5, 1, 15)
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_1oetj"]
+size = Vector3(5, 1, 15)
+
+[sub_resource type="BoxMesh" id="BoxMesh_wnd5m"]
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_d222q"]
+
+[node name="global" type="Node3D"]
+
+[node name="Camera3D" type="Camera3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 0.5, 0.866025, 0, -0.866025, 0.5, 0, 7, 0)
+
+[node name="DirectionalLight3D" type="DirectionalLight3D" parent="."]
+transform = Transform3D(0.69674, -0.607841, 0.380899, -0.0432417, 0.494443, 0.868134, -0.71602, -0.621334, 0.318214, 4.3622, 0, 0)
+shadow_enabled = true
+
+[node name="Player" type="CharacterBody3D" parent="."]
+collision_layer = 2
+script = ExtResource("1_w4jg0")
+m_scn_bullet = ExtResource("2_ktegy")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Player"]
+transform = Transform3D(1, 0, 0, 0, -4.37114e-08, 1, 0, -1, -4.37114e-08, 0, 0.2, 0)
+shape = SubResource("CylinderShape3D_em1v6")
+
+[node name="Timer_fire" type="Timer" parent="Player"]
+autostart = true
+
+[node name="Marker3D" type="Marker3D" parent="Player"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -0.7)
+
+[node name="VisualPlayer" parent="Player" instance=ExtResource("3_igkmx")]
+
+[node name="Enemy" parent="." instance=ExtResource("3_gxo67")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.392, 0, -12.455)
+
+[node name="Enemy2" parent="." instance=ExtResource("3_gxo67")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 2, 0, -8)
+
+[node name="Stage" type="Node3D" parent="."]
+
+[node name="Ground" type="StaticBody3D" parent="Stage"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.5, -7)
+collision_mask = 0
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="Stage/Ground"]
+mesh = SubResource("BoxMesh_heg0l")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Stage/Ground"]
+shape = SubResource("BoxShape3D_1oetj")
+
+[node name="StaticBody3D" type="StaticBody3D" parent="Stage"]
+transform = Transform3D(0.707107, 0, 0.707107, 0, 1, 0, -0.707107, 0, 0.707107, -0.335023, 0, -5.34003)
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="Stage/StaticBody3D"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 0)
+mesh = SubResource("BoxMesh_wnd5m")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Stage/StaticBody3D"]
+shape = SubResource("BoxShape3D_d222q")
+
+[connection signal="timeout" from="Player/Timer_fire" to="Player" method="_on_timer_fire_timeout"]

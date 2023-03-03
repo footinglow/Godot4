@@ -1,0 +1,22 @@
+[gd_scene load_steps=4 format=3 uid="uid://64waoercm2v6"]
+
+[ext_resource type="Script" path="res://bullet.gd" id="1_gvivr"]
+[ext_resource type="PackedScene" uid="uid://bbluq8uirgcm5" path="res://Visual/WalkMan.tscn" id="2_lha10"]
+
+[sub_resource type="CapsuleShape3D" id="CapsuleShape3D_02c2x"]
+radius = 0.1
+height = 0.5
+
+[node name="Bullet" type="CharacterBody3D"]
+collision_layer = 8
+collision_mask = 13
+script = ExtResource("1_gvivr")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="."]
+shape = SubResource("CapsuleShape3D_02c2x")
+
+[node name="VisibleOnScreenNotifier3D" type="VisibleOnScreenNotifier3D" parent="."]
+
+[node name="WalkMan" parent="." instance=ExtResource("2_lha10")]
+
+[connection signal="screen_exited" from="VisibleOnScreenNotifier3D" to="." method="_on_visible_on_screen_notifier_3d_screen_exited"]

@@ -1,0 +1,59 @@
+[gd_scene load_steps=9 format=3 uid="uid://bvsegfdykmmoo"]
+
+[ext_resource type="Material" uid="uid://b3qty5cpgtv41" path="res://Visual/vizual_enemy_castle.tres" id="1_f1bo3"]
+
+[sub_resource type="CylinderMesh" id="CylinderMesh_djqls"]
+height = 1.0
+
+[sub_resource type="CapsuleMesh" id="CapsuleMesh_osvoi"]
+height = 1.5
+
+[sub_resource type="CapsuleMesh" id="CapsuleMesh_kv5vm"]
+radius = 0.2
+height = 1.0
+
+[sub_resource type="CapsuleMesh" id="CapsuleMesh_050cg"]
+radius = 0.4
+height = 1.5
+
+[sub_resource type="CylinderMesh" id="CylinderMesh_fhxob"]
+top_radius = 0.02
+bottom_radius = 0.02
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_3fad4"]
+albedo_color = Color(0.796078, 0, 0.14902, 1)
+
+[sub_resource type="BoxMesh" id="BoxMesh_7e3gx"]
+material = SubResource("StandardMaterial3D_3fad4")
+size = Vector3(0.5, 0.5, 0.01)
+
+[node name="VisualEnemyCastle" type="Node3D"]
+
+[node name="Scale" type="Node3D" parent="."]
+
+[node name="Base" type="CSGMesh3D" parent="Scale"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.5, 0)
+mesh = SubResource("CylinderMesh_djqls")
+material = ExtResource("1_f1bo3")
+
+[node name="Top" type="CSGMesh3D" parent="Scale/Base"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.388751, 0)
+mesh = SubResource("CapsuleMesh_osvoi")
+material = ExtResource("1_f1bo3")
+
+[node name="subtraction_Door" type="CSGMesh3D" parent="Scale/Base"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.425758, 0.466178)
+operation = 2
+mesh = SubResource("CapsuleMesh_kv5vm")
+
+[node name="subtraction_room" type="CSGMesh3D" parent="Scale/Base"]
+operation = 2
+mesh = SubResource("CapsuleMesh_050cg")
+
+[node name="Flag" type="MeshInstance3D" parent="Scale/Base"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.970622, 0)
+mesh = SubResource("CylinderMesh_fhxob")
+
+[node name="Flag" type="MeshInstance3D" parent="Scale/Base/Flag"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.25, 0.821, 0)
+mesh = SubResource("BoxMesh_7e3gx")

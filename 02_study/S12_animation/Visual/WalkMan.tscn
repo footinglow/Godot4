@@ -1,0 +1,204 @@
+[gd_scene load_steps=9 format=3 uid="uid://bbluq8uirgcm5"]
+
+[ext_resource type="Script" path="res://Visual/WalkMan.gd" id="1_8b60a"]
+
+[sub_resource type="CapsuleMesh" id="CapsuleMesh_0mnrp"]
+height = 1.5
+
+[sub_resource type="CapsuleMesh" id="CapsuleMesh_wp5d4"]
+radius = 0.2
+height = 1.0
+
+[sub_resource type="SphereMesh" id="SphereMesh_cyeui"]
+
+[sub_resource type="Animation" id="Animation_pilg2"]
+loop_mode = 1
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Scale/Body/shoulder_Left:rotation")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.5),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Vector3(-0.785398, 0, 0), Vector3(0.785398, 0, 0)]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("Scale/Body/shoulder_Right:rotation")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0, 0.5),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Vector3(0.785398, 0, 0), Vector3(-0.785398, 0, 0)]
+}
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("Scale/Body/hip_Right:rotation")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0, 0.5),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Vector3(-0.785398, 0, 0), Vector3(0.785398, 0, 0)]
+}
+tracks/3/type = "value"
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/path = NodePath("Scale/Body/hip_Left:rotation")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/keys = {
+"times": PackedFloat32Array(0, 0.5),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Vector3(0.785398, 0, 0), Vector3(-0.785398, 0, 0)]
+}
+
+[sub_resource type="Animation" id="Animation_hbf0s"]
+resource_name = "Walk"
+length = 2.0
+loop_mode = 1
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Scale/Body/shoulder_Right:rotation")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 1.1),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Vector3(0.785398, 0, 0), Vector3(-0.785398, 0, 0)]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("Scale/Body/shoulder_Left:rotation")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0, 1.1),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Vector3(-0.785398, 0, 0), Vector3(0.785398, 0, 0)]
+}
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("Scale/Body/hip_Right:rotation")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0, 1.1),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Vector3(-0.785398, 0, 0), Vector3(0.785398, 0, 0)]
+}
+tracks/3/type = "value"
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/path = NodePath("Scale/Body/hip_Left:rotation")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/keys = {
+"times": PackedFloat32Array(0, 1.1),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Vector3(0.785398, 0, 0), Vector3(-0.785398, 0, 0)]
+}
+
+[sub_resource type="Animation" id="Animation_2kcc7"]
+resource_name = "Battle"
+loop_mode = 1
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Scale/Body/shoulder_Right:rotation")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.5),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Vector3(2.35619, 0, 0), Vector3(3.75246, 0, 0)]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("Scale/Body/shoulder_Left:rotation")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0, 0.5),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Vector3(3.75246, 0, 0), Vector3(2.35619, 0, 0)]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_y56je"]
+_data = {
+"Battle": SubResource("Animation_2kcc7"),
+"RESET": SubResource("Animation_pilg2"),
+"Walk": SubResource("Animation_hbf0s")
+}
+
+[node name="WalkMan" type="Node3D"]
+script = ExtResource("1_8b60a")
+
+[node name="Scale" type="Node3D" parent="."]
+transform = Transform3D(0.2, 0, 0, 0, 0.2, 0, 0, 0, 0.2, 0, 0, 0)
+
+[node name="Body" type="MeshInstance3D" parent="Scale"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.43542, 0)
+mesh = SubResource("CapsuleMesh_0mnrp")
+skeleton = NodePath("../..")
+
+[node name="shoulder_Right" type="Marker3D" parent="Scale/Body"]
+transform = Transform3D(1, 0, 0, 0, 0.707107, -0.707107, 0, 0.707107, 0.707107, 0.7, 0.7, 0)
+
+[node name="Right" type="MeshInstance3D" parent="Scale/Body/shoulder_Right"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.5, 0)
+mesh = SubResource("CapsuleMesh_wp5d4")
+skeleton = NodePath("../..")
+
+[node name="shoulder_Left" type="Marker3D" parent="Scale/Body"]
+transform = Transform3D(1, 0, 0, 0, 0.707107, 0.707107, 0, -0.707107, 0.707107, -0.7, 0.7, 0)
+
+[node name="arm_Left" type="MeshInstance3D" parent="Scale/Body/shoulder_Left"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.5, 0)
+mesh = SubResource("CapsuleMesh_wp5d4")
+skeleton = NodePath("../..")
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="Scale/Body"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.21306, 0)
+mesh = SubResource("SphereMesh_cyeui")
+
+[node name="hip_Right" type="Marker3D" parent="Scale/Body"]
+transform = Transform3D(1, 0, 0, 0, 0.707107, 0.707107, 0, -0.707107, 0.707107, 0.2, -0.6, 0)
+
+[node name="Leg_Right" type="MeshInstance3D" parent="Scale/Body/hip_Right"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.5, 0)
+mesh = SubResource("CapsuleMesh_wp5d4")
+skeleton = NodePath("../..")
+
+[node name="hip_Left" type="Marker3D" parent="Scale/Body"]
+transform = Transform3D(1, 0, 0, 0, 0.707107, -0.707107, 0, 0.707107, 0.707107, -0.2, -0.6, 0)
+
+[node name="Leg_Left" type="MeshInstance3D" parent="Scale/Body/hip_Left"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.5, 0)
+mesh = SubResource("CapsuleMesh_wp5d4")
+skeleton = NodePath("../..")
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
+autoplay = "RESET"
+libraries = {
+"": SubResource("AnimationLibrary_y56je")
+}

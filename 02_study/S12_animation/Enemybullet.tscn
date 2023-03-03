@@ -1,0 +1,22 @@
+[gd_scene load_steps=4 format=3 uid="uid://tifvon754qs"]
+
+[ext_resource type="Script" path="res://Enemybullet.gd" id="1_g3p8e"]
+[ext_resource type="PackedScene" uid="uid://chmtp06i7if5" path="res://Visual/WalkMan_Red.tscn" id="2_hhpgn"]
+
+[sub_resource type="CapsuleShape3D" id="CapsuleShape3D_02c2x"]
+radius = 0.1
+height = 0.5
+
+[node name="EnemyBullet" type="CharacterBody3D" groups=["EnemyGroup"]]
+collision_layer = 4
+collision_mask = 15
+script = ExtResource("1_g3p8e")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="."]
+shape = SubResource("CapsuleShape3D_02c2x")
+
+[node name="VisibleOnScreenNotifier3D" type="VisibleOnScreenNotifier3D" parent="."]
+
+[node name="WalkMan_Red" parent="." instance=ExtResource("2_hhpgn")]
+
+[connection signal="screen_exited" from="VisibleOnScreenNotifier3D" to="." method="_on_visible_on_screen_notifier_3d_screen_exited"]

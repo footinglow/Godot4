@@ -1,0 +1,177 @@
+[gd_scene load_steps=8 format=3 uid="uid://chmtp06i7if5"]
+
+[ext_resource type="Material" uid="uid://okhldljcy4q2" path="res://Visual/WalkMan_Red.tres" id="1_8dgo2"]
+
+[sub_resource type="CapsuleMesh" id="CapsuleMesh_0mnrp"]
+material = ExtResource("1_8dgo2")
+height = 1.5
+
+[sub_resource type="SphereMesh" id="SphereMesh_cyeui"]
+material = ExtResource("1_8dgo2")
+
+[sub_resource type="CapsuleMesh" id="CapsuleMesh_wp5d4"]
+material = ExtResource("1_8dgo2")
+radius = 0.2
+height = 1.0
+
+[sub_resource type="Animation" id="Animation_pilg2"]
+loop_mode = 1
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Scale/Body/Shoulder_Left:rotation")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.5),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Vector3(-0.785398, 0, 0), Vector3(0.785398, 0, 0)]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("Scale/Body/Shoulder_Right:rotation")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0, 0.5),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Vector3(0.785398, 0, 0), Vector3(-0.785398, 0, 0)]
+}
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("Scale/Body/Hip_Right:rotation")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0, 0.5),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Vector3(-0.785398, 0, 0), Vector3(0.785398, 0, 0)]
+}
+tracks/3/type = "value"
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/path = NodePath("Scale/Body/Hip_Left:rotation")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/keys = {
+"times": PackedFloat32Array(0, 0.5),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Vector3(0.785398, 0, 0), Vector3(-0.785398, 0, 0)]
+}
+
+[sub_resource type="Animation" id="Animation_hbf0s"]
+resource_name = "Walk"
+length = 2.0
+loop_mode = 1
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Scale/Body/Shoulder_Right:rotation")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 1.1),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Vector3(0.785398, 0, 0), Vector3(-0.785398, 0, 0)]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("Scale/Body/Shoulder_Left:rotation")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0, 1.1),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Vector3(-0.785398, 0, 0), Vector3(0.785398, 0, 0)]
+}
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("Scale/Body/Hip_Right:rotation")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0, 1.1),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Vector3(-0.785398, 0, 0), Vector3(0.785398, 0, 0)]
+}
+tracks/3/type = "value"
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/path = NodePath("Scale/Body/Hip_Left:rotation")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/keys = {
+"times": PackedFloat32Array(0, 1.1),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Vector3(0.785398, 0, 0), Vector3(-0.785398, 0, 0)]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_y56je"]
+_data = {
+"RESET": SubResource("Animation_pilg2"),
+"Walk": SubResource("Animation_hbf0s")
+}
+
+[node name="WalkMan_Red" type="Node3D"]
+
+[node name="Scale" type="Node3D" parent="."]
+transform = Transform3D(0.2, 0, 0, 0, 0.2, 0, 0, 0, 0.2, 0, 0, 0)
+
+[node name="Body" type="MeshInstance3D" parent="Scale"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.39818, 0)
+mesh = SubResource("CapsuleMesh_0mnrp")
+skeleton = NodePath("../..")
+
+[node name="Head" type="MeshInstance3D" parent="Scale/Body"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.21306, 0)
+mesh = SubResource("SphereMesh_cyeui")
+
+[node name="Shoulder_Right" type="Marker3D" parent="Scale/Body"]
+transform = Transform3D(1, 0, 0, 0, 0.982785, -0.184757, 0, 0.184757, 0.982785, 0.7, 0.7, 0)
+
+[node name="Arm_Right" type="MeshInstance3D" parent="Scale/Body/Shoulder_Right"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.5, 0)
+mesh = SubResource("CapsuleMesh_wp5d4")
+skeleton = NodePath("../..")
+
+[node name="Shoulder_Left" type="Marker3D" parent="Scale/Body"]
+transform = Transform3D(1, 0, 0, 0, 0.982785, 0.184757, 0, -0.184757, 0.982785, -0.7, 0.7, 0)
+
+[node name="Am_Left" type="MeshInstance3D" parent="Scale/Body/Shoulder_Left"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.5, 0)
+mesh = SubResource("CapsuleMesh_wp5d4")
+skeleton = NodePath("../..")
+
+[node name="Hip_Right" type="Marker3D" parent="Scale/Body"]
+transform = Transform3D(1, 0, 0, 0, 0.982785, 0.184757, 0, -0.184757, 0.982785, 0.2, -0.6, 0)
+
+[node name="Leg_Right" type="MeshInstance3D" parent="Scale/Body/Hip_Right"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.5, 0)
+mesh = SubResource("CapsuleMesh_wp5d4")
+skeleton = NodePath("../..")
+
+[node name="Hip_Left" type="Marker3D" parent="Scale/Body"]
+transform = Transform3D(1, 0, 0, 0, 0.982785, -0.184757, 0, 0.184757, 0.982785, -0.2, -0.6, 0)
+
+[node name="Leg_Left" type="MeshInstance3D" parent="Scale/Body/Hip_Left"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.5, 0)
+mesh = SubResource("CapsuleMesh_wp5d4")
+skeleton = NodePath("../..")
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
+autoplay = "Walk"
+libraries = {
+"": SubResource("AnimationLibrary_y56je")
+}
