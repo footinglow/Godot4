@@ -109,14 +109,14 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.2, 0)
 mesh = SubResource("SphereMesh_bih2a")
 
 [node name="Shoulder_Right" type="Marker3D" parent="Body"]
-transform = Transform3D(1, 0, 0, 0, -0.976834, 0.213997, 0, -0.213997, -0.976834, 0.7, 0.7, 0)
+transform = Transform3D(1, 0, 0, 0, -0.707103, -0.70711, 0, 0.70711, -0.707103, 0.7, 0.7, 0)
 
 [node name="Arm" type="MeshInstance3D" parent="Body/Shoulder_Right"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.5, 0)
 mesh = SubResource("CapsuleMesh_ketp5")
 
 [node name="Shoulder_Left" type="Marker3D" parent="Body"]
-transform = Transform3D(1, 0, 0, 0, -0.924834, -0.380371, 0, 0.380371, -0.924834, -0.7, 0.7, 0)
+transform = Transform3D(1, 0, 0, 0, -0.819151, 0.573578, 0, -0.573578, -0.819151, -0.7, 0.7, 0)
 
 [node name="Arm" type="MeshInstance3D" parent="Body/Shoulder_Left"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.5, 0)
@@ -137,7 +137,6 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.5, 0)
 mesh = SubResource("CapsuleMesh_ketp5")
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="."]
-autoplay = "Battle"
 libraries = {
 "": SubResource("AnimationLibrary_43ahl")
 }
