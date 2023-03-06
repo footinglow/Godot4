@@ -1,0 +1,60 @@
+[gd_scene load_steps=8 format=3 uid="uid://xr3v2o5feouc"]
+
+[ext_resource type="Script" path="res://Player.gd" id="1_w4jg0"]
+[ext_resource type="PackedScene" path="res://bullet.tscn" id="2_ktegy"]
+[ext_resource type="PackedScene" uid="uid://bapy5h4vk8kkv" path="res://enemy.tscn" id="3_gxo67"]
+
+[sub_resource type="SphereMesh" id="SphereMesh_ggemk"]
+
+[sub_resource type="SphereShape3D" id="SphereShape3D_j8g1l"]
+
+[sub_resource type="BoxMesh" id="BoxMesh_heg0l"]
+size = Vector3(5, 1, 15)
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_1oetj"]
+size = Vector3(5, 1, 15)
+
+[node name="global" type="Node3D"]
+
+[node name="Camera3D" type="Camera3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 0.5, 0.866025, 0, -0.866025, 0.5, 0, 7, 0)
+
+[node name="DirectionalLight3D" type="DirectionalLight3D" parent="."]
+transform = Transform3D(0.642788, -0.663414, 0.383022, 0, 0.5, 0.866026, -0.766044, -0.556671, 0.321394, -7.24224, 0, 0)
+shadow_enabled = true
+
+[node name="Player" type="CharacterBody3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.5, 0)
+collision_layer = 2
+script = ExtResource("1_w4jg0")
+m_scn_bullet = ExtResource("2_ktegy")
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="Player"]
+mesh = SubResource("SphereMesh_ggemk")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Player"]
+shape = SubResource("SphereShape3D_j8g1l")
+
+[node name="Timer_fire" type="Timer" parent="Player"]
+autostart = true
+
+[node name="Marker3D" type="Marker3D" parent="Player"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -0.7)
+
+[node name="StaticBody3D" type="StaticBody3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.5, -7)
+collision_mask = 0
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="StaticBody3D"]
+mesh = SubResource("BoxMesh_heg0l")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="StaticBody3D"]
+shape = SubResource("BoxShape3D_1oetj")
+
+[node name="Enemy" parent="." instance=ExtResource("3_gxo67")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -1, 0, -13)
+
+[node name="Enemy2" parent="." instance=ExtResource("3_gxo67")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 2, 0, -8)
+
+[connection signal="timeout" from="Player/Timer_fire" to="Player" method="_on_timer_fire_timeout"]

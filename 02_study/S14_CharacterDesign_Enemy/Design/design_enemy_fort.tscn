@@ -1,0 +1,55 @@
+[gd_scene load_steps=9 format=3 uid="uid://b4w03cof6tlsu"]
+
+[ext_resource type="Material" uid="uid://dtaqkcy5gkgnf" path="res://Design/design_enemy_fort.tres" id="1_34bre"]
+[ext_resource type="Material" uid="uid://dof1siy3wmxuk" path="res://Design/design_enemy_soldier.tres" id="2_350yp"]
+
+[sub_resource type="CylinderMesh" id="CylinderMesh_dvn38"]
+material = ExtResource("1_34bre")
+height = 1.0
+
+[sub_resource type="CapsuleMesh" id="CapsuleMesh_cog7c"]
+material = ExtResource("1_34bre")
+height = 1.5
+
+[sub_resource type="CapsuleMesh" id="CapsuleMesh_8iagx"]
+radius = 0.2
+height = 1.0
+
+[sub_resource type="CapsuleMesh" id="CapsuleMesh_tk28h"]
+radius = 0.4
+height = 1.5
+
+[sub_resource type="CylinderMesh" id="CylinderMesh_6tyj4"]
+top_radius = 0.02
+bottom_radius = 0.02
+height = 1.0
+
+[sub_resource type="BoxMesh" id="BoxMesh_xpxnx"]
+material = ExtResource("2_350yp")
+size = Vector3(0.5, 0.5, 0.01)
+
+[node name="DesignEnemyFort" type="Node3D"]
+
+[node name="OuterWall" type="CSGMesh3D" parent="."]
+mesh = SubResource("CylinderMesh_dvn38")
+
+[node name="Ceiling" type="CSGMesh3D" parent="OuterWall"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.4, 0)
+mesh = SubResource("CapsuleMesh_cog7c")
+
+[node name="Doorway" type="CSGMesh3D" parent="OuterWall"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 0.5)
+operation = 2
+mesh = SubResource("CapsuleMesh_8iagx")
+
+[node name="Room" type="CSGMesh3D" parent="OuterWall"]
+operation = 2
+mesh = SubResource("CapsuleMesh_tk28h")
+
+[node name="Flag" type="MeshInstance3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.5, 0)
+mesh = SubResource("CylinderMesh_6tyj4")
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="Flag"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.25, 0.25, 0)
+mesh = SubResource("BoxMesh_xpxnx")
