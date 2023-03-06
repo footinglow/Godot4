@@ -2,7 +2,7 @@
 
 [ext_resource type="Script" path="res://Enemy.gd" id="1_j3eca"]
 [ext_resource type="PackedScene" uid="uid://byohgtx6c0xs5" path="res://Enemybullet.tscn" id="2_hciq7"]
-[ext_resource type="PackedScene" uid="uid://b4w03cof6tlsu" path="res://Design/design_enemy_fort.tscn" id="3_bvusx"]
+[ext_resource type="PackedScene" uid="uid://b13uo1gn6ctqv" path="res://Design/design_enemy_fort.tscn" id="3_3kufi"]
 
 [sub_resource type="CylinderShape3D" id="CylinderShape3D_jafs0"]
 
@@ -36,7 +36,7 @@ wait_time = 0.5
 [node name="Marker3D" type="Marker3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 0.7)
 
-[node name="DesignEnemyFort" parent="." instance=ExtResource("3_bvusx")]
+[node name="DesignEnemyFort" parent="." instance=ExtResource("3_3kufi")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.5, 0)
 
 [connection signal="body_entered" from="BulletSensor" to="." method="_on_bullet_sensor_body_entered"]
