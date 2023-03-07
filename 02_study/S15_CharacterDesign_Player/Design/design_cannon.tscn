@@ -1,0 +1,87 @@
+[gd_scene load_steps=10 format=3 uid="uid://1kpdbhi6jngv"]
+
+[ext_resource type="Material" uid="uid://npbo58g6h5xt" path="res://Design/design_cannon.tres" id="1_r5lrl"]
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_17glo"]
+albedo_color = Color(0.627451, 0.509804, 0.156863, 1)
+
+[sub_resource type="BoxMesh" id="BoxMesh_2ecqh"]
+material = SubResource("StandardMaterial3D_17glo")
+size = Vector3(1.5, 0.3, 2)
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_jtpua"]
+albedo_color = Color(0, 0, 0, 1)
+
+[sub_resource type="CylinderMesh" id="CylinderMesh_1gn5w"]
+material = SubResource("StandardMaterial3D_jtpua")
+height = 0.3
+
+[sub_resource type="CapsuleMesh" id="CapsuleMesh_im47y"]
+material = ExtResource("1_r5lrl")
+
+[sub_resource type="CylinderMesh" id="CylinderMesh_bnp1i"]
+material = ExtResource("1_r5lrl")
+top_radius = 1.0
+height = 1.5
+
+[sub_resource type="Animation" id="Animation_nkumt"]
+resource_name = "Live"
+length = 0.5
+loop_mode = 1
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Chassis/GunBody:scale")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.1, 0.5),
+"transitions": PackedFloat32Array(1, 1, 1),
+"update": 0,
+"values": [Vector3(1.1, 1.1, 1.1), Vector3(1, 1, 1), Vector3(1, 1, 1)]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("Chassis:rotation")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0, 0.25),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Vector3(0, 0.0174533, 0), Vector3(0, -0.0174533, 0)]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_bv5ww"]
+_data = {
+"Live": SubResource("Animation_nkumt")
+}
+
+[node name="DesignCannon" type="Node3D"]
+
+[node name="Chassis" type="MeshInstance3D" parent="."]
+transform = Transform3D(0.999873, 0, 0.0159576, 0, 1, 0, -0.0159576, 0, 0.999873, 0, 0.5, 0)
+mesh = SubResource("BoxMesh_2ecqh")
+
+[node name="Tire_Right" type="MeshInstance3D" parent="Chassis"]
+transform = Transform3D(-4.37114e-08, -1, 0, 1, -4.37114e-08, 0, 0, 0, 1, 1, 0, 0)
+mesh = SubResource("CylinderMesh_1gn5w")
+
+[node name="Tire_Left" type="MeshInstance3D" parent="Chassis"]
+transform = Transform3D(-4.37114e-08, -1, 0, 1, -4.37114e-08, 0, 0, 0, 1, -1, 0, 0)
+mesh = SubResource("CylinderMesh_1gn5w")
+
+[node name="GunBody" type="MeshInstance3D" parent="Chassis"]
+transform = Transform3D(1, 0, 0, 0, 0.173648, 0.984808, 0, -0.984808, 0.173648, 0, 0.5, 0)
+mesh = SubResource("CapsuleMesh_im47y")
+
+[node name="GunTop" type="MeshInstance3D" parent="Chassis/GunBody"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.25, 0)
+mesh = SubResource("CylinderMesh_bnp1i")
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
+autoplay = "Live"
+libraries = {
+"": SubResource("AnimationLibrary_bv5ww")
+}
