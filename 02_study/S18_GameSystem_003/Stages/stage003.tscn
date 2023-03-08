@@ -1,0 +1,42 @@
+[gd_scene load_steps=7 format=3 uid="uid://ba8aycchert68"]
+
+[ext_resource type="Script" path="res://Stages/stage_normal.gd" id="1_877j0"]
+[ext_resource type="PackedScene" path="res://Characters/player.tscn" id="2_xk203"]
+[ext_resource type="PackedScene" uid="uid://ccipvgkox0558" path="res://StageItems/ground.tscn" id="3_qysdf"]
+[ext_resource type="PackedScene" uid="uid://co218syojoubj" path="res://Characters/enemy.tscn" id="4_hgbh5"]
+[ext_resource type="PackedScene" uid="uid://d0ukkuyyrnr8e" path="res://StageItems/rocky_mountain.tscn" id="5_umkpo"]
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_ixapx"]
+size = Vector3(5, 2, 1)
+
+[node name="Stage" type="Node3D"]
+script = ExtResource("1_877j0")
+
+[node name="Camera3D" type="Camera3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 0.573576, 0.819152, 0, -0.819152, 0.573576, 0, 7, 0)
+
+[node name="DirectionalLight3D" type="DirectionalLight3D" parent="."]
+transform = Transform3D(0.642788, -0.663414, 0.383022, 0, 0.5, 0.866026, -0.766044, -0.556671, 0.321394, -7.24224, 0, 0)
+shadow_enabled = true
+
+[node name="Player" parent="." instance=ExtResource("2_xk203")]
+
+[node name="Ground" parent="." instance=ExtResource("3_qysdf")]
+
+[node name="Enemy" parent="." instance=ExtResource("4_hgbh5")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.938611, 0, -13.4963)
+
+[node name="Enemy2" parent="." instance=ExtResource("4_hgbh5")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 2, 0, -8)
+
+[node name="EnemyBulletSensor" type="Area3D" parent="."]
+collision_layer = 0
+collision_mask = 4
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="EnemyBulletSensor"]
+shape = SubResource("BoxShape3D_ixapx")
+
+[node name="RockyMountain" parent="." instance=ExtResource("5_umkpo")]
+transform = Transform3D(0.707107, 0, 0.707107, 0, 1, 0, -0.707107, 0, 0.707107, 0, 0, -5)
+
+[connection signal="body_entered" from="EnemyBulletSensor" to="." method="_on_enemy_bullet_sensor_body_entered"]
