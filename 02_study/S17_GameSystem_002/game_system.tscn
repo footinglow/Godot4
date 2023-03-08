@@ -1,0 +1,11 @@
+[gd_scene load_steps=3 format=3 uid="uid://c8yexdbj2u0ep"]
+
+[ext_resource type="PackedScene" uid="uid://b3gtjl31l2ei0" path="res://Stages/stage001.tscn" id="1_72f4c"]
+[ext_resource type="Script" path="res://game_system.gd" id="1_njgf7"]
+
+[node name="GameSystem" type="Node3D"]
+script = ExtResource("1_njgf7")
+
+[node name="CurrentStage" type="Node3D" parent="."]
+
+[node name="Stage" parent="CurrentStage" instance=ExtResource("1_72f4c")]
