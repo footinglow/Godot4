@@ -74,6 +74,7 @@ func _physics_process(delta):
 			# 画面タッチされたら、Readyに遷移する
 			if m_f_touch:					
 				# 次のステージに進む
+				# ステージは0,1,2,0,1,2,0...と繰り返す
 				m_i_current_stage_idx = ( m_i_current_stage_idx + 1 ) % m_nodearray_stages.size()
 				set_new_stage(m_i_current_stage_idx)
 				# ゲーム状態を「レディ」状態にして、「Ready」を表示する
@@ -82,7 +83,7 @@ func _physics_process(delta):
 				$Messages/Ready.show()
 		EN_GAME_STS.STAGE_FAILED:
 			# 画面タッチされたら、Readyに遷移する
-			if m_f_touch:					# ステージは0,1,2,0,1,2,0...と繰り返す
+			if m_f_touch:
 				set_new_stage(m_i_current_stage_idx)
 				# ゲーム状態を「レディ」状態にして、「Ready」を表示する
 				m_en_game_sts = EN_GAME_STS.READY
