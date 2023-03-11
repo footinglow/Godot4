@@ -83,6 +83,6 @@ func _physics_process(delta):
 		EN_GAME_STS.STAGE_FAILED:
 			# 画面タッチされたら、Readyに遷移する
 			if m_f_touch:
-				Global.goto_scene("res://ttile.tscn")
+				Global.goto_scene("res://title.tscn")
 	# _physics_process()の最後にm_f_touchフラグを落とす
 	m_f_touch = false
