@@ -1,0 +1,68 @@
+[gd_scene load_steps=7 format=3 uid="uid://bad7lv0mhhg31"]
+
+[ext_resource type="PackedScene" uid="uid://bet2tqt68g865" path="res://Design/design_cannon.tscn" id="1_fg68r"]
+[ext_resource type="Script" path="res://ttile.gd" id="1_fgn7i"]
+[ext_resource type="PackedScene" path="res://Design/design_enemy_fort.tscn" id="2_cr51x"]
+[ext_resource type="PackedScene" path="res://Design/design_enemy_soldier.tscn" id="3_2spt8"]
+[ext_resource type="PackedScene" path="res://Design/design_my_soldier.tscn" id="4_yskk1"]
+
+[sub_resource type="LabelSettings" id="LabelSettings_u4see"]
+font_size = 100
+
+[node name="Ttile" type="Control"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_fgn7i")
+
+[node name="Label" type="Label" parent="."]
+layout_mode = 1
+anchors_preset = 5
+anchor_left = 0.5
+anchor_right = 0.5
+offset_left = -215.5
+offset_right = 215.5
+offset_bottom = 140.0
+grow_horizontal = 2
+text = "MyGame"
+label_settings = SubResource("LabelSettings_u4see")
+
+[node name="Button" type="Button" parent="."]
+layout_mode = 1
+anchors_preset = 7
+anchor_left = 0.5
+anchor_top = 1.0
+anchor_right = 0.5
+anchor_bottom = 1.0
+offset_left = -50.0
+offset_top = -83.0
+offset_right = 50.0
+offset_bottom = -52.0
+grow_horizontal = 2
+grow_vertical = 0
+text = "Game Start!"
+
+[node name="Background" type="Node3D" parent="."]
+
+[node name="Camera3D" type="Camera3D" parent="Background"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 5)
+
+[node name="DirectionalLight3D" type="DirectionalLight3D" parent="Background"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -10, 0, 0)
+
+[node name="DesignCannon" parent="Background" instance=ExtResource("1_fg68r")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.5, -2, 1.5)
+
+[node name="DesignEnemyFort" parent="Background" instance=ExtResource("2_cr51x")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 2, 0, 0)
+
+[node name="DesignEnemySoldier" parent="Background" instance=ExtResource("3_2spt8")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1.5, 0, -4)
+
+[node name="DesignMySoldier" parent="Background" instance=ExtResource("4_yskk1")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -2, 0, -2)
+
+[connection signal="pressed" from="Button" to="." method="_on_button_pressed"]
