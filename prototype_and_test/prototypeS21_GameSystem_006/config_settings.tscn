@@ -1,0 +1,78 @@
+[gd_scene load_steps=4 format=3 uid="uid://c261i6g4lqv6a"]
+
+[ext_resource type="Script" path="res://config_settings.gd" id="1_7gv5o"]
+
+[sub_resource type="LabelSettings" id="LabelSettings_bpxkt"]
+font_size = 30
+
+[sub_resource type="LabelSettings" id="LabelSettings_vldf4"]
+font_size = 30
+
+[node name="ConfigSettings" type="Control"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = 189.0
+offset_top = 107.0
+offset_right = -221.0
+offset_bottom = -166.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_7gv5o")
+
+[node name="Title" type="Label" parent="."]
+layout_mode = 1
+anchors_preset = 5
+anchor_left = 0.5
+anchor_right = 0.5
+offset_left = -53.5
+offset_right = 53.5
+offset_bottom = 26.0
+grow_horizontal = 2
+text = "Config Settins"
+label_settings = SubResource("LabelSettings_bpxkt")
+
+[node name="FiringTiming" type="Label" parent="."]
+layout_mode = 1
+anchors_preset = -1
+anchor_left = 14.275
+anchor_top = 2.8
+anchor_right = 14.275
+anchor_bottom = 2.8
+offset_left = -10420.1
+offset_top = -943.0
+offset_right = -10150.1
+offset_bottom = -898.0
+grow_horizontal = 2
+grow_vertical = 2
+text = "発射間隔 1.0秒"
+label_settings = SubResource("LabelSettings_vldf4")
+
+[node name="HSlider" type="HSlider" parent="."]
+layout_mode = 0
+offset_left = 390.0
+offset_top = 109.0
+offset_right = 610.0
+offset_bottom = 148.0
+min_value = 1.0
+max_value = 10.0
+value = 1.0
+
+[node name="CloseButton" type="Button" parent="."]
+layout_mode = 1
+anchors_preset = 7
+anchor_left = 0.5
+anchor_top = 1.0
+anchor_right = 0.5
+anchor_bottom = 1.0
+offset_left = -65.5
+offset_top = -90.0
+offset_right = 65.5
+offset_bottom = -39.0
+grow_horizontal = 2
+grow_vertical = 0
+text = "閉じる"
+
+[connection signal="drag_ended" from="HSlider" to="." method="_on_h_slider_drag_ended"]
+[connection signal="pressed" from="CloseButton" to="." method="_on_close_button_pressed"]

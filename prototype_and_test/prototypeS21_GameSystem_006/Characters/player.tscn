@@ -1,0 +1,28 @@
+[gd_scene load_steps=5 format=3 uid="uid://mohonu71regx"]
+
+[ext_resource type="Script" path="res://Characters/Player.gd" id="1_3ko38"]
+[ext_resource type="PackedScene" uid="uid://hrccjkngh5o2" path="res://Characters/bullet.tscn" id="2_00ned"]
+[ext_resource type="PackedScene" uid="uid://bet2tqt68g865" path="res://Design/design_cannon.tscn" id="3_xe1ii"]
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_l3ccm"]
+size = Vector3(0.5, 0.5, 0.8)
+
+[node name="Player" type="CharacterBody3D"]
+collision_layer = 2
+script = ExtResource("1_3ko38")
+m_scn_bullet = ExtResource("2_00ned")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.25, -0.1)
+shape = SubResource("BoxShape3D_l3ccm")
+
+[node name="Timer_fire" type="Timer" parent="."]
+autostart = true
+
+[node name="Marker3D" type="Marker3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -0.7)
+
+[node name="DesignCannon" parent="." instance=ExtResource("3_xe1ii")]
+transform = Transform3D(0.3, 0, 0, 0, 0.3, 0, 0, 0, 0.3, 0, 0, 0)
+
+[connection signal="timeout" from="Timer_fire" to="." method="_on_timer_fire_timeout"]
