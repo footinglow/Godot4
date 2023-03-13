@@ -1,8 +1,12 @@
-[gd_scene format=3 uid="uid://ddj7dbjruy3by"]
+[gd_scene load_steps=2 format=3 uid="uid://ddj7dbjruy3by"]
+
+[ext_resource type="Script" path="res://settings_popup_panel.gd" id="1_fj4wd"]
 
 [node name="SettingsPopupPanel" type="PopupPanel"]
+process_mode = 3
 size = Vector2i(308, 208)
 visible = true
+script = ExtResource("1_fj4wd")
 
 [node name="ControlBaseSize" type="Control" parent="."]
 custom_minimum_size = Vector2(300, 200)
@@ -24,7 +28,15 @@ text = "発射間隔1秒"
 
 [node name="HSlider" type="HSlider" parent="ControlBaseSize/VBoxContainer"]
 layout_mode = 2
+min_value = 0.1
+max_value = 1.0
+step = 0.1
+value = 0.1
 
 [node name="Button" type="Button" parent="ControlBaseSize/VBoxContainer"]
 layout_mode = 2
 text = "設定完了"
+
+[connection signal="popup_hide" from="." to="." method="_on_popup_hide"]
+[connection signal="drag_ended" from="ControlBaseSize/VBoxContainer/HSlider" to="." method="_on_h_slider_drag_ended"]
+[connection signal="pressed" from="ControlBaseSize/VBoxContainer/Button" to="." method="_on_button_pressed"]
