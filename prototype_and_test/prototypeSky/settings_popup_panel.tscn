@@ -1,0 +1,80 @@
+[gd_scene load_steps=3 format=3 uid="uid://ddj7dbjruy3by"]
+
+[ext_resource type="Script" path="res://settings_popup_panel.gd" id="1_fj4wd"]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_jp7d5"]
+bg_color = Color(0.54902, 0.313726, 0.196078, 1)
+border_width_left = 10
+border_width_top = 10
+border_width_right = 10
+border_width_bottom = 10
+border_color = Color(0.301961, 0.168627, 0.00784314, 1)
+border_blend = true
+corner_radius_top_left = 30
+corner_radius_top_right = 30
+corner_radius_bottom_right = 30
+corner_radius_bottom_left = 30
+
+[node name="SettingsPopupPanel" type="PopupPanel"]
+process_mode = 3
+size = Vector2i(320, 220)
+visible = true
+theme_override_styles/panel = SubResource("StyleBoxFlat_jp7d5")
+script = ExtResource("1_fj4wd")
+
+[node name="ControlBaseSize" type="Control" parent="."]
+custom_minimum_size = Vector2(300, 200)
+layout_mode = 3
+anchors_preset = 0
+offset_left = 10.0
+offset_top = 10.0
+offset_right = 310.0
+offset_bottom = 210.0
+
+[node name="VBoxContainer" type="VBoxContainer" parent="ControlBaseSize"]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -45.0
+offset_top = -40.5
+offset_right = 45.0
+offset_bottom = 40.5
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="MarginContainer" type="MarginContainer" parent="ControlBaseSize/VBoxContainer"]
+layout_mode = 2
+theme_override_constants/margin_top = 10
+theme_override_constants/margin_bottom = 10
+
+[node name="Label" type="Label" parent="ControlBaseSize/VBoxContainer/MarginContainer"]
+layout_mode = 2
+text = "発射間隔1秒"
+
+[node name="MarginContainer2" type="MarginContainer" parent="ControlBaseSize/VBoxContainer"]
+layout_mode = 2
+theme_override_constants/margin_top = 10
+theme_override_constants/margin_bottom = 10
+
+[node name="HSlider" type="HSlider" parent="ControlBaseSize/VBoxContainer/MarginContainer2"]
+layout_mode = 2
+min_value = 0.1
+max_value = 1.0
+step = 0.1
+value = 0.1
+
+[node name="MarginContainer3" type="MarginContainer" parent="ControlBaseSize/VBoxContainer"]
+layout_mode = 2
+theme_override_constants/margin_top = 10
+theme_override_constants/margin_bottom = 10
+
+[node name="Button" type="Button" parent="ControlBaseSize/VBoxContainer/MarginContainer3"]
+layout_mode = 2
+text = "設定完了"
+
+[connection signal="popup_hide" from="." to="." method="_on_popup_hide"]
+[connection signal="drag_ended" from="ControlBaseSize/VBoxContainer/MarginContainer2/HSlider" to="." method="_on_h_slider_drag_ended"]
+[connection signal="pressed" from="ControlBaseSize/VBoxContainer/MarginContainer3/Button" to="." method="_on_button_pressed"]
