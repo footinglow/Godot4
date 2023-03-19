@@ -1,0 +1,47 @@
+[gd_scene load_steps=8 format=3 uid="uid://b3gtjl31l2ei0"]
+
+[ext_resource type="Script" path="res://Stages/stage_normal.gd" id="1_xssuo"]
+[ext_resource type="PackedScene" uid="uid://ko5lfffl4sum" path="res://Characters/player.tscn" id="1_y7an7"]
+[ext_resource type="PackedScene" uid="uid://ccipvgkox0558" path="res://StageItems/ground.tscn" id="2_o6ec0"]
+[ext_resource type="PackedScene" uid="uid://co218syojoubj" path="res://Characters/enemy.tscn" id="3_3gttc"]
+[ext_resource type="PackedScene" uid="uid://ddc6d0m7f0w4i" path="res://StageItems/multiplication_area.tscn" id="5_4rwhn"]
+[ext_resource type="PackedScene" uid="uid://mgkgigjgw8iy" path="res://StageItems/moving_wall.tscn" id="6_waadh"]
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_ixapx"]
+size = Vector3(5, 2, 1)
+
+[node name="Stage" type="Node3D"]
+script = ExtResource("1_xssuo")
+
+[node name="Camera3D" type="Camera3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 0.573576, 0.819152, 0, -0.819152, 0.573576, 0, 7, 0)
+
+[node name="DirectionalLight3D" type="DirectionalLight3D" parent="."]
+transform = Transform3D(0.642788, -0.663414, 0.383022, 0, 0.5, 0.866026, -0.766044, -0.556671, 0.321394, -7.24224, 0, 0)
+shadow_enabled = true
+
+[node name="Player" parent="." instance=ExtResource("1_y7an7")]
+
+[node name="Ground" parent="." instance=ExtResource("2_o6ec0")]
+
+[node name="Enemy2" parent="." instance=ExtResource("3_3gttc")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 2, 0, -8)
+
+[node name="EnemyBulletSensor" type="Area3D" parent="."]
+collision_layer = 0
+collision_mask = 4
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="EnemyBulletSensor"]
+shape = SubResource("BoxShape3D_ixapx")
+
+[node name="MultiplicationArea_x2" parent="." instance=ExtResource("5_4rwhn")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -3)
+
+[node name="MultiplicationArea_x3" parent="." instance=ExtResource("5_4rwhn")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.5, 0, -5)
+m_i_magnification = 3.0
+
+[node name="MovingWall" parent="." instance=ExtResource("6_waadh")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 3, 0, 0, -4)
+
+[connection signal="body_entered" from="EnemyBulletSensor" to="." method="_on_enemy_bullet_sensor_body_entered"]
