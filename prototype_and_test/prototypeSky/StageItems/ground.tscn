@@ -1,7 +1,13 @@
-[gd_scene load_steps=4 format=3 uid="uid://ccipvgkox0558"]
+[gd_scene load_steps=6 format=3 uid="uid://ccipvgkox0558"]
+
+[ext_resource type="Texture2D" uid="uid://d1u8lx7idruan" path="res://assets/Cracked_Mud_001_NORM.jpg" id="1_ovgiv"]
+[ext_resource type="Texture2D" uid="uid://dkmfq7qxx5l0u" path="res://assets/Cracked_Mud_001_COLOR.jpg" id="1_p536k"]
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_depdl"]
-albedo_color = Color(0.392157, 0.588235, 0.0784314, 1)
+albedo_color = Color(0.913725, 0.913725, 0.909804, 1)
+albedo_texture = ExtResource("1_p536k")
+heightmap_scale = -9.933
+heightmap_texture = ExtResource("1_ovgiv")
 
 [sub_resource type="BoxMesh" id="BoxMesh_heg0l"]
 material = SubResource("StandardMaterial3D_depdl")

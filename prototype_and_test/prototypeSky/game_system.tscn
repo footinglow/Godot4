@@ -1,18 +1,18 @@
 [gd_scene load_steps=7 format=3 uid="uid://c8yexdbj2u0ep"]
 
 [ext_resource type="Script" path="res://game_system.gd" id="1_njgf7"]
-[ext_resource type="Texture2D" uid="uid://dkoo1tqtxff6f" path="res://assets/Epic_BlueSunset_EquiRect_flat.png" id="2_3ycpl"]
+[ext_resource type="Texture2D" uid="uid://dkoo1tqtxff6f" path="res://assets/Epic_BlueSunset_EquiRect_flat.png" id="2_k7l53"]
 [ext_resource type="Script" path="res://sky.gd" id="3_ib7mf"]
 
 [sub_resource type="LabelSettings" id="LabelSettings_6a7c7"]
 font_size = 70
 
-[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_d7quv"]
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_p2od4"]
 cull_mode = 1
-albedo_texture = ExtResource("2_3ycpl")
+albedo_texture = ExtResource("2_k7l53")
 
 [sub_resource type="SphereMesh" id="SphereMesh_8wl66"]
-material = SubResource("StandardMaterial3D_d7quv")
+material = SubResource("StandardMaterial3D_p2od4")
 radius = 100.0
 height = 200.0
 
@@ -87,6 +87,7 @@ text = "Stage Failed"
 label_settings = SubResource("LabelSettings_6a7c7")
 
 [node name="sky" type="MeshInstance3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, -1, 8.74228e-08, 0, -8.74228e-08, -1, 0, 0, 0)
 mesh = SubResource("SphereMesh_8wl66")
 script = ExtResource("3_ib7mf")
 m_d_speed_degps = 0.1
