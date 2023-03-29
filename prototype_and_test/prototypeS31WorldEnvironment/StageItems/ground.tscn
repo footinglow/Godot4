@@ -1,0 +1,88 @@
+[gd_scene load_steps=17 format=3 uid="uid://ccipvgkox0558"]
+
+[ext_resource type="Texture2D" uid="uid://pv7eyyrc401g" path="res://assets/texture/Stylized_Grass_003_basecolor.jpg" id="1_h7vsy"]
+[ext_resource type="Texture2D" uid="uid://c62af1gl7g34a" path="res://assets/texture/AllSkyFree1.0/Epic_BlueSunset_EquiRect_flat.png" id="2_4fxla"]
+[ext_resource type="Script" path="res://StageItems/BackgroundSky.gd" id="3_jllt7"]
+[ext_resource type="Material" uid="uid://ce6xveyw756nh" path="res://Design/Wall.tres" id="4_6v6db"]
+[ext_resource type="Script" path="res://StageItems/WorldEnvironment.gd" id="5_ru6ec"]
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_depdl"]
+albedo_texture = ExtResource("1_h7vsy")
+uv1_scale = Vector3(10, 10, 10)
+
+[sub_resource type="BoxMesh" id="BoxMesh_heg0l"]
+material = SubResource("StandardMaterial3D_depdl")
+size = Vector3(5, 1, 15)
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_1oetj"]
+size = Vector3(5, 1, 15)
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_46ueo"]
+cull_mode = 1
+albedo_texture = ExtResource("2_4fxla")
+
+[sub_resource type="SphereMesh" id="SphereMesh_tywau"]
+material = SubResource("StandardMaterial3D_46ueo")
+radius = 100.0
+height = 200.0
+
+[sub_resource type="BoxMesh" id="BoxMesh_5khoh"]
+material = ExtResource("4_6v6db")
+size = Vector3(0.5, 1.5, 15)
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_blffw"]
+size = Vector3(0.5, 3, 15)
+
+[sub_resource type="GDScript" id="GDScript_5hh13"]
+
+[sub_resource type="PanoramaSkyMaterial" id="PanoramaSkyMaterial_ungnl"]
+panorama = ExtResource("2_4fxla")
+script = SubResource("GDScript_5hh13")
+
+[sub_resource type="Sky" id="Sky_75xqx"]
+sky_material = SubResource("PanoramaSkyMaterial_ungnl")
+
+[sub_resource type="Environment" id="Environment_fuu1u"]
+background_mode = 2
+background_energy_multiplier = 0.67
+sky = SubResource("Sky_75xqx")
+sky_rotation = Vector3(-3.14159, 0.0174533, 0)
+ambient_light_energy = 0.67
+
+[node name="Ground" type="StaticBody3D"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.5, -7)
+collision_mask = 0
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="."]
+mesh = SubResource("BoxMesh_heg0l")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="."]
+shape = SubResource("BoxShape3D_1oetj")
+
+[node name="BackgroundSky" type="MeshInstance3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, -1, 8.74228e-08, 0, -8.74228e-08, -1, 0, 0, 0)
+visible = false
+mesh = SubResource("SphereMesh_tywau")
+script = ExtResource("3_jllt7")
+
+[node name="WallLeft" type="StaticBody3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -2.75, 0.25, 0)
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="WallLeft"]
+mesh = SubResource("BoxMesh_5khoh")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="WallLeft"]
+shape = SubResource("BoxShape3D_blffw")
+
+[node name="WallRight" type="StaticBody3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 2.75, 0.25, 0)
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="WallRight"]
+mesh = SubResource("BoxMesh_5khoh")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="WallRight"]
+shape = SubResource("BoxShape3D_blffw")
+
+[node name="WorldEnvironment" type="WorldEnvironment" parent="."]
+environment = SubResource("Environment_fuu1u")
+script = ExtResource("5_ru6ec")
