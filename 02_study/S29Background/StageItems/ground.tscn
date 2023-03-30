@@ -16,6 +16,7 @@ size = Vector3(5, 1, 15)
 size = Vector3(5, 1, 15)
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_46ueo"]
+transparency = 1
 cull_mode = 1
 albedo_texture = ExtResource("2_4fxla")
 
@@ -35,6 +36,6 @@ mesh = SubResource("BoxMesh_heg0l")
 shape = SubResource("BoxShape3D_1oetj")
 
 [node name="BackgroundSky" type="MeshInstance3D" parent="."]
-transform = Transform3D(1, 0, 0, 0, -1, 8.74228e-08, 0, -8.74228e-08, -1, 0, 0, 0)
+transform = Transform3D(1, 0, 0, 0, -1, 1.50996e-07, 0, -1.50996e-07, -1, 0, 0, 0)
 mesh = SubResource("SphereMesh_tywau")
 script = ExtResource("3_jllt7")

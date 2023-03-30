@@ -16,6 +16,7 @@ size = Vector3(5, 1, 15)
 size = Vector3(5, 1, 15)
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_46ueo"]
+transparency = 1
 cull_mode = 1
 albedo_texture = ExtResource("2_4fxla")
 
