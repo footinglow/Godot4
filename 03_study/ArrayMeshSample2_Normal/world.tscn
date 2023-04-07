@@ -1,7 +1,7 @@
 [gd_scene load_steps=3 format=3 uid="uid://igvjx7squgbo"]
 
 [ext_resource type="Script" path="res://World.gd" id="1_woj1a"]
-[ext_resource type="ArrayMesh" uid="uid://cckok0kobk5tj" path="res://hexagonal_pyramid.tres" id="2_1ijw1"]
+[ext_resource type="ArrayMesh" path="res://hexagonal_pyramid.tres" id="2_1ijw1"]
 
 [node name="World" type="Node3D"]
 script = ExtResource("1_woj1a")

@@ -1,6 +1,6 @@
 extends Node3D
 
-var m_i_radial_segments_num = 100		# 六角錐の６
+var m_i_radial_segments_num = 100	# 六角錐の６
 var m_d_radius_m = 3.0				# 半径
 var m_d_height_m = 3.0				# 高さ
 
@@ -11,7 +11,7 @@ func _ready():
 	var normals = PackedVector3Array()
 	var uvs = PackedVector2Array()
 
-	# 1周分の角度をアジアンでリストに保存する。最後にスタート地点の0°を追加する
+	# 1周分の角度をラジアンでリストに保存する。最後にスタート地点の0°を追加する
 	var d_rad_list = Array()
 	for i in range(m_i_radial_segments_num):
 		var rate = float(i) / float(m_i_radial_segments_num)
@@ -28,13 +28,13 @@ func _ready():
 		vertices.push_back(c)
 		vertices.push_back(b)
 
-		# 法線を原点x,y,z)=0,0,0)から放射状に設定する
+		# 法線を原点(x,y,z)=(0,0,0)から放射状に設定する
 		normals.push_back(a.normalized())
 		normals.push_back(c.normalized())
 		normals.push_back(b.normalized())
 		
 		# UV設定
-		# 半径が3mの場合、(x,y)=(-3,-3)が0,0)、3,3)が1,1)になるように設定する
+		# 半径が3mの場合、(x,y)=(-3,-3)の時は(u,v)=(0,0)、(x,y)=(3,3)の時は(u,v)=(1,1)になるように対応付ける
 		var u = (-m_d_radius_m + a.x) / ( 2 * m_d_radius_m )
 		var v = (-m_d_radius_m + a.y) / ( 2 * m_d_radius_m )
 		uvs.append(Vector2(u, v))
