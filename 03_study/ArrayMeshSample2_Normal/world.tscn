@@ -1,0 +1,18 @@
+[gd_scene load_steps=3 format=3 uid="uid://igvjx7squgbo"]
+
+[ext_resource type="Script" path="res://World.gd" id="1_woj1a"]
+[ext_resource type="ArrayMesh" uid="uid://cckok0kobk5tj" path="res://hexagonal_pyramid.tres" id="2_1ijw1"]
+
+[node name="World" type="Node3D"]
+script = ExtResource("1_woj1a")
+
+[node name="Camera3D" type="Camera3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 0.707107, 0.707107, 0, -0.707107, 0.707107, 0, 4, 7)
+
+[node name="DirectionalLight3D" type="DirectionalLight3D" parent="."]
+transform = Transform3D(0.707107, -0.122788, 0.696364, 0, 0.984808, 0.173648, -0.707107, -0.122788, 0.696364, -8.96263, 0, 0)
+
+[node name="ArrayMesh" type="MeshInstance3D" parent="."]
+
+[node name="SavedMesh" type="MeshInstance3D" parent="."]
+mesh = ExtResource("2_1ijw1")
