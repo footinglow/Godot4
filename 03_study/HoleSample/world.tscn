@@ -22,6 +22,7 @@ transform = Transform3D(1, 0, 0, 0, 0.707107, 0.707107, 0, -0.707107, 0.707107, 
 
 [node name="DirectionalLight3D" type="DirectionalLight3D" parent="."]
 transform = Transform3D(0.707107, -0.122788, 0.696364, 0, 0.984808, 0.173648, -0.707107, -0.122788, 0.696364, -10, 0, 0)
+shadow_enabled = true
 
 [node name="HoleOnGround" type="StaticBody3D" parent="."]
 axis_lock_linear_y = true
