@@ -1,0 +1,79 @@
+[gd_scene load_steps=6 format=3 uid="uid://dor4b3kodptj5"]
+
+[ext_resource type="Script" path="res://HoleOnGround.gd" id="1_x4p55"]
+
+[sub_resource type="SphereMesh" id="SphereMesh_hb7vv"]
+radius = 0.2
+height = 0.4
+
+[sub_resource type="SphereShape3D" id="SphereShape3D_s0oiv"]
+radius = 0.2
+
+[sub_resource type="BoxMesh" id="BoxMesh_aq2gi"]
+size = Vector3(0.5, 1, 0.5)
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_m3w1d"]
+size = Vector3(0.5, 1, 0.5)
+
+[node name="World" type="Node3D"]
+
+[node name="Camera3D" type="Camera3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 0.707107, 0.707107, 0, -0.707107, 0.707107, 0, 4, 7)
+
+[node name="DirectionalLight3D" type="DirectionalLight3D" parent="."]
+transform = Transform3D(0.707107, -0.122788, 0.696364, 0, 0.984808, 0.173648, -0.707107, -0.122788, 0.696364, -10, 0, 0)
+
+[node name="HoleOnGround" type="StaticBody3D" parent="."]
+axis_lock_linear_y = true
+script = ExtResource("1_x4p55")
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="HoleOnGround"]
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="HoleOnGround"]
+
+[node name="Objects" type="Node3D" parent="."]
+
+[node name="obj1" type="RigidBody3D" parent="Objects"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -1.70263, 4, 0)
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="Objects/obj1"]
+mesh = SubResource("SphereMesh_hb7vv")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Objects/obj1"]
+shape = SubResource("SphereShape3D_s0oiv")
+
+[node name="obj2" type="RigidBody3D" parent="Objects"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 4, 2.45386)
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="Objects/obj2"]
+mesh = SubResource("SphereMesh_hb7vv")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Objects/obj2"]
+shape = SubResource("SphereShape3D_s0oiv")
+
+[node name="obj3" type="RigidBody3D" parent="Objects"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 4, -2.21015)
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="Objects/obj3"]
+mesh = SubResource("SphereMesh_hb7vv")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Objects/obj3"]
+shape = SubResource("SphereShape3D_s0oiv")
+
+[node name="obj4" type="RigidBody3D" parent="Objects"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 2.54258, 4, 0)
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="Objects/obj4"]
+mesh = SubResource("SphereMesh_hb7vv")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Objects/obj4"]
+shape = SubResource("SphereShape3D_s0oiv")
+
+[node name="obj5" type="RigidBody3D" parent="Objects"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -2.43107, 4, -2.7433)
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="Objects/obj5"]
+mesh = SubResource("BoxMesh_aq2gi")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Objects/obj5"]
+shape = SubResource("BoxShape3D_m3w1d")
