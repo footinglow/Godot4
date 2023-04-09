@@ -1,8 +1,18 @@
 extends StaticBody3D
 
-
+#
+# カーソルキー操作でhole（落とし穴）を動かす
+#
 const SPEED = 3.0
 
+# 地面の大きさ
+var m_d_ground_w_m : float = 20.0
+var m_d_ground_d_m : float = 20.0
+
+# 落とし穴
+var m_v3_hole_pos = Vector3(0, 0, 0)
+var m_d_hole_x_m : float = 1.0
+var m_d_hole_z_m : float = 1.0
 
 func _physics_process(delta):
 	var velocity = Vector3.ZERO
@@ -15,21 +25,12 @@ func _physics_process(delta):
 		velocity.x = move_toward(velocity.x, 0, SPEED)
 		velocity.z = move_toward(velocity.z, 0, SPEED)
 
-	transform.origin += velocity.normalized()*SPEED*delta
-
-	set_hole_and_ground_array_mesh(transform.origin.x, transform.origin.z)
+	# holeの位置を移動
+	m_v3_hole_pos += velocity.normalized()*SPEED*delta
+	set_hole_and_ground_array_mesh()
 	
-
-
-var m_d_ground_w_m : float = 20.0
-var m_d_ground_d_m : float = 20.0
-var m_v3_hole_pos = Vector3(0, 0, 0)
-var m_d_hole_x_m : float = 1.0
-var m_d_hole_z_m : float = 1.0
-
-
-
-
+# 三角形２つで四角形を作る
+# l:Left, t:Top, r:Right, b:bottom
 func add_square(vertices : PackedVector3Array, x_l, z_t, x_r, z_b):
 	vertices.push_back(Vector3(x_l, 0, z_t))
 	vertices.push_back(Vector3(x_r, 0, z_t))
@@ -40,18 +41,18 @@ func add_square(vertices : PackedVector3Array, x_l, z_t, x_r, z_b):
 	vertices.push_back(Vector3(x_l, 0, z_t))
 	
 
-func set_hole_and_ground_array_mesh(x, z):
-	m_v3_hole_pos.x = x
-	m_v3_hole_pos.z = z
-	
-	
+# 落とし穴ArrayMeshを作成する
+func set_hole_and_ground_array_mesh():
+
 	var vertices = PackedVector3Array()
 
-	# holeの左上、右下の位置を計算
-	var ground_LT = m_v3_hole_pos - Vector3(-m_d_ground_w_m/2.0 , 0, -m_d_ground_d_m/2.0)
-	var ground_RB = m_v3_hole_pos - Vector3( m_d_ground_w_m/2.0 , 0,  m_d_ground_d_m/2.0)
-	var hole_LT = m_v3_hole_pos - Vector3(-m_d_hole_x_m/2.0 , 0, -m_d_hole_z_m/2.0)
-	var hole_RB = m_v3_hole_pos - Vector3( m_d_hole_x_m/2.0 , 0,  m_d_hole_z_m/2.0)
+	# 地面のXZ平面上の左上、右下の位置を設定
+	var ground_LT = Vector3(-m_d_ground_w_m/2.0 , 0, -m_d_ground_d_m/2.0)
+	var ground_RB = Vector3( m_d_ground_w_m/2.0 , 0,  m_d_ground_d_m/2.0)
+	# holeのXZ平面上の左上、右下の位置を設定
+	var hole_size = Vector3( m_d_hole_x_m , 0,  m_d_hole_z_m)
+	var hole_LT = m_v3_hole_pos - hole_size/2.0
+	var hole_RB = m_v3_hole_pos + hole_size/2.0
 
 	# 3×３グリッドの上３ブロック
 	add_square(vertices, ground_LT.x, ground_LT.z ,ground_RB.x, hole_LT.z)
