@@ -35,7 +35,7 @@ script = ExtResource("1_x4p55")
 [node name="Objects" type="Node3D" parent="."]
 
 [node name="obj1" type="RigidBody3D" parent="Objects"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -1.70263, 4, 0)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -2, 4, 0)
 
 [node name="MeshInstance3D" type="MeshInstance3D" parent="Objects/obj1"]
 mesh = SubResource("SphereMesh_hb7vv")
@@ -44,7 +44,7 @@ mesh = SubResource("SphereMesh_hb7vv")
 shape = SubResource("SphereShape3D_s0oiv")
 
 [node name="obj2" type="RigidBody3D" parent="Objects"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 4, 2.45386)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 4, 3)
 
 [node name="MeshInstance3D" type="MeshInstance3D" parent="Objects/obj2"]
 mesh = SubResource("SphereMesh_hb7vv")
@@ -53,7 +53,7 @@ mesh = SubResource("SphereMesh_hb7vv")
 shape = SubResource("SphereShape3D_s0oiv")
 
 [node name="obj3" type="RigidBody3D" parent="Objects"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 4, -2.21015)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 4, -2)
 
 [node name="MeshInstance3D" type="MeshInstance3D" parent="Objects/obj3"]
 mesh = SubResource("SphereMesh_hb7vv")
@@ -62,7 +62,7 @@ mesh = SubResource("SphereMesh_hb7vv")
 shape = SubResource("SphereShape3D_s0oiv")
 
 [node name="obj4" type="RigidBody3D" parent="Objects"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 2.54258, 4, 0)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 2, 4, 0)
 
 [node name="MeshInstance3D" type="MeshInstance3D" parent="Objects/obj4"]
 mesh = SubResource("SphereMesh_hb7vv")
@@ -71,7 +71,7 @@ mesh = SubResource("SphereMesh_hb7vv")
 shape = SubResource("SphereShape3D_s0oiv")
 
 [node name="obj5" type="RigidBody3D" parent="Objects"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -2.43107, 4, -2.7433)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -2, 4, -2)
 
 [node name="MeshInstance3D" type="MeshInstance3D" parent="Objects/obj5"]
 mesh = SubResource("BoxMesh_aq2gi")
