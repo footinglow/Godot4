@@ -1,0 +1,82 @@
+[gd_scene load_steps=4 format=3 uid="uid://c8yexdbj2u0ep"]
+
+[ext_resource type="Script" path="res://game_system.gd" id="1_njgf7"]
+[ext_resource type="Script" path="res://HUD.gd" id="2_1cq4j"]
+
+[sub_resource type="LabelSettings" id="LabelSettings_6a7c7"]
+font_size = 70
+
+[node name="GameSystem" type="Node3D"]
+script = ExtResource("1_njgf7")
+
+[node name="CurrentStage" type="Node3D" parent="."]
+
+[node name="Messages" type="Node" parent="."]
+
+[node name="Ready" type="Label" parent="Messages"]
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -104.0
+offset_top = -49.5
+offset_right = 104.0
+offset_bottom = 49.5
+grow_horizontal = 2
+grow_vertical = 2
+text = "Ready"
+label_settings = SubResource("LabelSettings_6a7c7")
+
+[node name="Go" type="Label" parent="Messages"]
+visible = false
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -104.0
+offset_top = -49.5
+offset_right = 104.0
+offset_bottom = 49.5
+grow_horizontal = 2
+grow_vertical = 2
+text = "Go!"
+label_settings = SubResource("LabelSettings_6a7c7")
+
+[node name="StageClear" type="Label" parent="Messages"]
+visible = false
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -104.0
+offset_top = -49.5
+offset_right = 104.0
+offset_bottom = 49.5
+grow_horizontal = 2
+grow_vertical = 2
+text = "Stage Clear"
+label_settings = SubResource("LabelSettings_6a7c7")
+
+[node name="StageFailed" type="Label" parent="Messages"]
+visible = false
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -104.0
+offset_top = -49.5
+offset_right = 104.0
+offset_bottom = 49.5
+grow_horizontal = 2
+grow_vertical = 2
+text = "Stage Failed"
+label_settings = SubResource("LabelSettings_6a7c7")
+
+[node name="HUD" type="Node2D" parent="."]
+script = ExtResource("2_1cq4j")
+
+[node name="EnergyBar" type="MeshInstance2D" parent="HUD"]

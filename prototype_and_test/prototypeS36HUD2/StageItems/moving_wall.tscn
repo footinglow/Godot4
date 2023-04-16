@@ -1,0 +1,23 @@
+[gd_scene load_steps=5 format=3 uid="uid://mgkgigjgw8iy"]
+
+[ext_resource type="Script" path="res://StageItems/moving_wall.gd" id="1_krafv"]
+[ext_resource type="Material" uid="uid://bpxgkdgsmgttb" path="res://Design/diamondAluminum.tres" id="2_ijslu"]
+
+[sub_resource type="BoxMesh" id="BoxMesh_wagh3"]
+lightmap_size_hint = Vector2i(10, 21)
+material = ExtResource("2_ijslu")
+size = Vector3(0.3, 1, 1)
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_wlugp"]
+size = Vector3(0.3, 1, 1)
+
+[node name="MovingWall" type="StaticBody3D"]
+script = ExtResource("1_krafv")
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.5, 0)
+mesh = SubResource("BoxMesh_wagh3")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.5, 0)
+shape = SubResource("BoxShape3D_wlugp")
