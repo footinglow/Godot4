@@ -1,6 +1,2 @@
 # Godot 4+ specific ignores
 .godot/
-assets/texture/godot-material-dpa-1.0.1/diamondplate.png
-assets/texture/godot-material-dpa-1.0.1/diamondplate_spec.png
-assets/texture/godot-material-dpa-1.0.1/diamondplate_tex.png
-assets/texture/AllSkyFree1.0/Epic_BlueSunset_EquiRect_flat.png
