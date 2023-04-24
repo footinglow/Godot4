@@ -1,0 +1,42 @@
+[gd_scene load_steps=6 format=3 uid="uid://cvmvgi50llgag"]
+
+[ext_resource type="Script" path="res://World.gd" id="1_1gmaq"]
+
+[sub_resource type="BoxMesh" id="BoxMesh_60h2i"]
+size = Vector3(10, 1, 50)
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_kycrp"]
+size = Vector3(10, 1, 50)
+
+[sub_resource type="SphereMesh" id="SphereMesh_qi8d8"]
+
+[sub_resource type="SphereShape3D" id="SphereShape3D_wxa4l"]
+
+[node name="Base" type="Node3D"]
+
+[node name="World" type="Node3D" parent="."]
+script = ExtResource("1_1gmaq")
+
+[node name="DirectionalLight3D" type="DirectionalLight3D" parent="World"]
+transform = Transform3D(-0.707107, -0.183013, 0.683013, 0, 0.965926, 0.258819, -0.707107, 0.183013, -0.683013, 14, 0, 0)
+shadow_enabled = true
+
+[node name="Floor" type="StaticBody3D" parent="World"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.5, -20.2463)
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="World/Floor"]
+mesh = SubResource("BoxMesh_60h2i")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="World/Floor"]
+shape = SubResource("BoxShape3D_kycrp")
+
+[node name="MyBall" type="CharacterBody3D" parent="."]
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="MyBall"]
+mesh = SubResource("SphereMesh_qi8d8")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="MyBall"]
+shape = SubResource("SphereShape3D_wxa4l")
+
+[node name="Camera3D" type="Camera3D" parent="MyBall"]
+transform = Transform3D(1, 0, 0, 0, 0.707107, 0.707107, 0, -0.707107, 0.707107, 0, 10, 2)
