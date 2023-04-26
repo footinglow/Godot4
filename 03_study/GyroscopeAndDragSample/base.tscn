@@ -1,0 +1,60 @@
+[gd_scene load_steps=8 format=3 uid="uid://cvmvgi50llgag"]
+
+[ext_resource type="Script" path="res://World.gd" id="1_1gmaq"]
+[ext_resource type="Script" path="res://HUD.gd" id="2_16vnj"]
+
+[sub_resource type="BoxMesh" id="BoxMesh_60h2i"]
+size = Vector3(10, 1, 10)
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_kycrp"]
+size = Vector3(10, 1, 10)
+
+[sub_resource type="PhysicsMaterial" id="PhysicsMaterial_h10rx"]
+rough = true
+bounce = 0.36
+
+[sub_resource type="SphereMesh" id="SphereMesh_qi8d8"]
+
+[sub_resource type="SphereShape3D" id="SphereShape3D_wxa4l"]
+
+[node name="Base" type="Node3D"]
+
+[node name="Camera3D" type="Camera3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, -4.37114e-08, 1, 0, -1, -4.37114e-08, 0, 10, 0)
+
+[node name="DirectionalLight3D" type="DirectionalLight3D" parent="."]
+transform = Transform3D(-0.707107, -0.183013, 0.683013, 0, 0.965926, 0.258819, -0.707107, 0.183013, -0.683013, 14, 0, 0)
+shadow_enabled = true
+
+[node name="World" type="Node3D" parent="."]
+script = ExtResource("1_1gmaq")
+
+[node name="x" type="Node3D" parent="World"]
+
+[node name="z" type="Node3D" parent="World/x"]
+
+[node name="Floor" type="StaticBody3D" parent="World/x/z"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.5, 0)
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="World/x/z/Floor"]
+mesh = SubResource("BoxMesh_60h2i")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="World/x/z/Floor"]
+shape = SubResource("BoxShape3D_kycrp")
+
+[node name="MyBall" type="RigidBody3D" parent="World/x/z"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 4, 0)
+physics_material_override = SubResource("PhysicsMaterial_h10rx")
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="World/x/z/MyBall"]
+mesh = SubResource("SphereMesh_qi8d8")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="World/x/z/MyBall"]
+shape = SubResource("SphereShape3D_wxa4l")
+
+[node name="HUD" type="Control" parent="."]
+layout_mode = 3
+anchors_preset = 0
+offset_right = 500.0
+offset_bottom = 900.0
+script = ExtResource("2_16vnj")
