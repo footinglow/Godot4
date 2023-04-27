@@ -1,8 +1,9 @@
-[gd_scene load_steps=13 format=3 uid="uid://cvmvgi50llgag"]
+[gd_scene load_steps=14 format=3 uid="uid://cvmvgi50llgag"]
 
 [ext_resource type="Script" path="res://World.gd" id="1_1gmaq"]
 [ext_resource type="Script" path="res://HUD.gd" id="2_16vnj"]
 [ext_resource type="Texture2D" uid="uid://dejg6hhne7iqy" path="res://assets/texture/Wall_Stone_022_ambientOcclusion.jpg" id="2_54dhs"]
+[ext_resource type="PackedScene" uid="uid://hnt8ffp20rde" path="res://rounder_poll.tscn" id="3_5js6i"]
 
 [sub_resource type="PhysicsMaterial" id="PhysicsMaterial_h10rx"]
 rough = true
@@ -40,7 +41,7 @@ size = Vector3(1, 1, 20)
 transform = Transform3D(1, 0, 0, 0, -4.37114e-08, 1, 0, -1, -4.37114e-08, 0, 10, 0)
 
 [node name="DirectionalLight3D" type="DirectionalLight3D" parent="."]
-transform = Transform3D(-0.707107, -0.183013, 0.683013, 0, 0.965926, 0.258819, -0.707107, 0.183013, -0.683013, 14, 0, 0)
+transform = Transform3D(1, 0, 0, 0, -4.37114e-08, 1, 0, -1, -4.37114e-08, 14, 0, 0)
 shadow_enabled = true
 
 [node name="World" type="Node3D" parent="."]
@@ -79,6 +80,8 @@ mesh = SubResource("BoxMesh_8bnx2")
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="World/x/z/Path"]
 shape = SubResource("BoxShape3D_6t1x2")
+
+[node name="RounderPoll" parent="World/x/z" instance=ExtResource("3_5js6i")]
 
 [node name="HUD" type="Control" parent="."]
 layout_mode = 3
