@@ -1,0 +1,51 @@
+[gd_scene load_steps=7 format=3 uid="uid://8edttpt6u8u7"]
+
+[ext_resource type="Script" path="res://world.gd" id="1_7e5fa"]
+
+[sub_resource type="PhysicsMaterial" id="PhysicsMaterial_rfjnj"]
+bounce = 0.5
+
+[sub_resource type="SphereMesh" id="SphereMesh_eubgs"]
+
+[sub_resource type="SphereShape3D" id="SphereShape3D_1g8wy"]
+
+[sub_resource type="BoxMesh" id="BoxMesh_ixji2"]
+size = Vector3(10, 1, 20)
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_3kam6"]
+size = Vector3(10, 1, 20)
+
+[node name="World" type="Node3D"]
+script = ExtResource("1_7e5fa")
+
+[node name="Camera3D" type="Camera3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 0.5, 0.866025, 0, -0.866025, 0.5, 0, 12, 12)
+
+[node name="DirectionalLight3D" type="DirectionalLight3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, -4.37114e-08, 1, 0, -1, -4.37114e-08, -10, 0, 0)
+shadow_enabled = true
+
+[node name="MyBall" type="RigidBody3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 4, 0)
+physics_material_override = SubResource("PhysicsMaterial_rfjnj")
+gravity_scale = 2.0
+linear_damp = 2.0
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="MyBall"]
+mesh = SubResource("SphereMesh_eubgs")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="MyBall"]
+shape = SubResource("SphereShape3D_1g8wy")
+
+[node name="x" type="Node3D" parent="."]
+
+[node name="z" type="Node3D" parent="x"]
+
+[node name="Floor" type="StaticBody3D" parent="x/z"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.5, 0)
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="x/z/Floor"]
+mesh = SubResource("BoxMesh_ixji2")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="x/z/Floor"]
+shape = SubResource("BoxShape3D_3kam6")
