@@ -1,0 +1,25 @@
+[gd_scene load_steps=4 format=3 uid="uid://dr4w8jr1nhkn3"]
+
+[ext_resource type="Script" path="res://world.gd" id="1_7sgon"]
+
+[sub_resource type="BoxMesh" id="BoxMesh_nwwbf"]
+
+[sub_resource type="CylinderMesh" id="CylinderMesh_bluof"]
+top_radius = 0.0
+height = 1.0
+
+[node name="World" type="Node3D"]
+script = ExtResource("1_7sgon")
+
+[node name="Camera3D" type="Camera3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, -4.37114e-08, 1, 0, -1, -4.37114e-08, 0, 5, 0)
+
+[node name="DirectionalLight3D" type="DirectionalLight3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, -4.37114e-08, 1, 0, -1, -4.37114e-08, -10, 0, 0)
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="."]
+mesh = SubResource("BoxMesh_nwwbf")
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="MeshInstance3D"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 0.5)
+mesh = SubResource("CylinderMesh_bluof")
