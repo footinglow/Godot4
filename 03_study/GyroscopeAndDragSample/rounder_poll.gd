@@ -1,5 +1,7 @@
 extends Area3D
 
+var m_material_ccw = preload("res://design/rounder_poll_ccw.tres")
+var m_material_cw  = preload("res://design/rounder_poll_cw.tres")
 
 var m_node_player
 var m_v3_pre_player_pos = Vector3.ZERO
@@ -29,12 +31,11 @@ func _physics_process(delta):
 		pass
 		
 	# 時計回り方向の場合と逆方向の場合で色を変更する
-	var material : StandardMaterial3D = $area.mesh.surface_get_material(0)
 	if diff_deg < 0:
 		# 時計回りなのでOK
-		material.albedo_color = Color.GREEN
+		$area.mesh.surface_set_material(0, m_material_cw)
 	else :
-		material.albedo_color = Color.RED
+		$area.mesh.surface_set_material(0, m_material_ccw)
 
 	# 前回値として保存する
 	m_d_pre_player_deg = deg;

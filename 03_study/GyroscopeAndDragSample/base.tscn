@@ -3,7 +3,7 @@
 [ext_resource type="Script" path="res://World.gd" id="1_1gmaq"]
 [ext_resource type="Script" path="res://HUD.gd" id="2_16vnj"]
 [ext_resource type="Texture2D" uid="uid://dejg6hhne7iqy" path="res://assets/texture/Wall_Stone_022_ambientOcclusion.jpg" id="2_54dhs"]
-[ext_resource type="PackedScene" uid="uid://hnt8ffp20rde" path="res://rounder_poll.tscn" id="3_5js6i"]
+[ext_resource type="PackedScene" uid="uid://6ua0ygnqctl2" path="res://rounder_poll.tscn" id="3_5js6i"]
 
 [sub_resource type="PhysicsMaterial" id="PhysicsMaterial_h10rx"]
 rough = true
