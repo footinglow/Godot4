@@ -14,14 +14,16 @@ func get_gravity_on_godot_axes() -> Vector3:
 
 func _physics_process(delta):
 	# 重力の方向を取得
-	var g = get_gravity_on_godot_axes()
+	var g : Vector3 = get_gravity_on_godot_axes()
 
-	# ノードの向きを初期化する（インスペクタのNode3D/Transform/Rotationを(0,0,0)にする
-	$x.look_at(Vector3.FORWARD, Vector3.UP)
-	$x/z.look_at(Vector3.FORWARD, Vector3.UP)
+	# 現在のノードxの角度をオイラー角[rad]で取得する。インスペクタのNode3D/Transform/Rotationの値
+	var v3_x_rot : Vector3 =  $x.transform.basis.get_euler()
+	# 重力センサー値から重力方向角度を計算する
+	var x_rad = atan2(g.z, g.y) + PI
+	# 重力の方向を打ち消す方向（スマホを傾けた方向）を目標角度として現在の角度との差分を回線指示する
+	$x.rotate_x( -x_rad - v3_x_rot.x )
 
-	# 重力センサーの値に従って回転する
-	var x_rad = atan2(g.y, -g.z) + PI/2
-	$x.rotate_x( -x_rad )
+	# x軸の回転と同じ
+	var v3_z_rot : Vector3 = $x/z.transform.basis.get_euler()
 	var z_rad = atan2(g.y, g.x) + PI/2
-	$x/z.rotate_z( -z_rad )
+	$x/z.rotate_z( -z_rad - v3_z_rot.z)
