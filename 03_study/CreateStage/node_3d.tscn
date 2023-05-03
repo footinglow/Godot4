@@ -1,9 +1,21 @@
-[gd_scene load_steps=6 format=3 uid="uid://c42kxo3lb5s0h"]
+[gd_scene load_steps=10 format=3 uid="uid://c42kxo3lb5s0h"]
 
 [ext_resource type="Script" path="res://StaticBody3D.gd" id="1_062ct"]
 [ext_resource type="Script" path="res://node_3d.gd" id="1_mu68d"]
+[ext_resource type="ArrayMesh" uid="uid://dugwqctukowxc" path="res://stagemesh.tres" id="3_1xnw5"]
 
-[sub_resource type="Curve3D" id="Curve3D_v81os"]
+[sub_resource type="ArrayMesh" id="ArrayMesh_rurff"]
+
+[sub_resource type="Curve3D" id="Curve3D_ksyj8"]
+
+[sub_resource type="BoxMesh" id="BoxMesh_hoghf"]
+
+[sub_resource type="Curve3D" id="Curve3D_ax1g2"]
+_data = {
+"points": PackedVector3Array(0, 0, 0, 0, 0, -2, 0, 0, 0, 0, 0, 2, 0, 0, 0, 3, 0, -5),
+"tilts": PackedFloat32Array(0, 0)
+}
+point_count = 2
 
 [sub_resource type="SphereMesh" id="SphereMesh_3d3j3"]
 
@@ -13,29 +25,57 @@
 script = ExtResource("1_mu68d")
 
 [node name="Camera3D" type="Camera3D" parent="."]
-transform = Transform3D(1, 0, 0, 0, -4.37114e-08, 1, 0, -1, -4.37114e-08, 0, 100, 30)
+transform = Transform3D(1, 0, 0, 0, -4.37114e-08, 1, 0, -1, -4.37114e-08, 0, 100, -30)
 
 [node name="DirectionalLight3D" type="DirectionalLight3D" parent="."]
-transform = Transform3D(1, 0, 0, 0, -4.37114e-08, 1, 0, -1, -4.37114e-08, -10, 0, 0)
+transform = Transform3D(1, 0, 0, 0, 0.995631, -0.0933784, 0, 0.0933784, 0.995631, -516.489, 0.659411, 0)
 
 [node name="StaticBody3D" type="StaticBody3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.5, 0)
 script = ExtResource("1_062ct")
 
 [node name="StageFloor" type="MeshInstance3D" parent="StaticBody3D"]
+mesh = SubResource("ArrayMesh_rurff")
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="StaticBody3D"]
 
 [node name="Path3D" type="Path3D" parent="StaticBody3D"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.5, 0)
-curve = SubResource("Curve3D_v81os")
+curve = SubResource("Curve3D_ksyj8")
 
 [node name="PathFollow3D" type="PathFollow3D" parent="StaticBody3D/Path3D"]
+
+[node name="left" type="Marker3D" parent="StaticBody3D/Path3D/PathFollow3D"]
+
+[node name="right" type="Marker3D" parent="StaticBody3D/Path3D/PathFollow3D"]
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="StaticBody3D/Path3D/PathFollow3D"]
+transform = Transform3D(0.707107, 0.5, 0.5, 0, 0.707107, -0.707107, -0.707107, 0.5, 0.5, 0, 0, 0)
+mesh = SubResource("BoxMesh_hoghf")
 
 [node name="Debug" type="Node3D" parent="StaticBody3D"]
 
 [node name="PathLine" type="MeshInstance3D" parent="StaticBody3D/Debug"]
 skeleton = NodePath("../..")
+
+[node name="StageMEsh" type="MeshInstance3D" parent="StaticBody3D/Debug"]
+visible = false
+mesh = ExtResource("3_1xnw5")
+
+[node name="Path3D" type="Path3D" parent="StaticBody3D/Debug"]
+curve = SubResource("Curve3D_ax1g2")
+
+[node name="PathFollow3D" type="PathFollow3D" parent="StaticBody3D/Debug/Path3D"]
+transform = Transform3D(-0.999995, 0, -8.74224e-08, 0, 1, 0, 8.74224e-08, 0, -0.999995, 0, 0, 0)
+
+[node name="left" type="Marker3D" parent="StaticBody3D/Debug/Path3D/PathFollow3D"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -1, 0, 0)
+
+[node name="right" type="Marker3D" parent="StaticBody3D/Debug/Path3D/PathFollow3D"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1, 0, 0)
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="StaticBody3D/Debug/Path3D/PathFollow3D"]
+transform = Transform3D(0.707107, 0.5, 0.5, 0, 0.707107, -0.707107, -0.707107, 0.5, 0.5, 0, 0, 0)
+mesh = SubResource("BoxMesh_hoghf")
 
 [node name="RigidBody3D" type="RigidBody3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.5, 2)

@@ -17,7 +17,8 @@ extends StaticBody3D
 
 var m_r2_islands = null
 var m_v3_path_pos = null
-
+var m_v3_path_left_pos = null
+var m_v3_path_right_pos = null
 
 # 三角形２つで四角形を作る
 # l:Left, t:Top, r:Right, b:bottom
@@ -40,8 +41,8 @@ func add_square(vertices, normals, x_l, z_t, x_r, z_b):
 func create_map():
 	m_r2_islands = Array()
 	m_v3_path_pos = Array()
-	
-
+	m_v3_path_left_pos = Array()
+	m_v3_path_right_pos = Array()
 
 	var i_island_num = randi_range(m_i_island_num_min, m_i_island_num_max)	# from,to含む乱数
 
@@ -91,37 +92,99 @@ func create_path(pre_r : Rect2, r : Rect2, d_dir_deg : float, d_path_len : float
 	# Path点列の初期化
 	var v3_pre_pos = Vector3(
 						pre_r.position.x + d_pre_path_x,
-						0.0,
-						pre_r.position.y + pre_r.size.y)
+						0,
+						-(pre_r.position.y + pre_r.size.y))
 	var v3_next_pos = Vector3(
 						r.position.x + d_next_path_x,
-						0.0,
-						r.position.y)
+						0,
+						-r.position.y)
 
 	print("v3_pre_pos:", v3_pre_pos)
 	print("v3_next_pos:", v3_next_pos)
+	$Path3D/PathFollow3D/left.transform.origin = Vector3(-d_path_w/2.0, 0, 0)
+	$Path3D/PathFollow3D/right.transform.origin = Vector3(d_path_w/2.0, 0, 0)
 
 	$Path3D.curve.clear_points()
-	$Path3D.curve.point_count = 2	# 入り口と出口の2点を設定する
-	$Path3D.curve.add_point(Vector3.ZERO, Vector3.ZERO, Vector3(0, 0, d_path_len))
-	$Path3D.curve.add_point(v3_next_pos - v3_pre_pos, Vector3(0, 0, -d_path_len), Vector3.ZERO)
-	
+	$Path3D.curve.add_point(Vector3.ZERO,             Vector3.ZERO,                Vector3(0, 0, -d_path_len*2))
+	$Path3D.curve.add_point(v3_next_pos - v3_pre_pos, Vector3(0, -0,  d_path_len*2), Vector3.ZERO)
+	#$Path3D.curve.point_count = 2	# 入り口と出口の2点を設定する
 	var max : float = roundf(d_path_len)
 	for i in range(max+1):								# int型で丸める。10mの場合、0,1,2,...10まで回したい
 		$Path3D/PathFollow3D.progress_ratio = i / max 	# 10で割ると１になる
 		m_v3_path_pos.append(v3_pre_pos + $Path3D/PathFollow3D.position)
-		print("progress_ratio:", $Path3D/PathFollow3D.progress_ratio, ", position:", $Path3D/PathFollow3D.position)
-
+		m_v3_path_left_pos.append(v3_pre_pos + $Path3D/PathFollow3D/left.global_position)
+		m_v3_path_right_pos.append(v3_pre_pos + $Path3D/PathFollow3D/right.global_position)
+		print(
+			"progress_ratio:", $Path3D/PathFollow3D.progress_ratio, 
+			", rotation:", $Path3D/PathFollow3D.transform.basis.get_euler(),
+			", left:", $Path3D/PathFollow3D/left.global_position,
+			", right:", $Path3D/PathFollow3D/right.global_position)
+						
+	$Path3D/PathFollow3D.progress_ratio = 0
+	print(
+			"progress_ratio:", $Path3D/PathFollow3D.progress_ratio, 
+			", rotation:", $Path3D/PathFollow3D.transform.basis.get_euler(),
+			", left:", $Path3D/PathFollow3D/left.global_position,
+			", right:", $Path3D/PathFollow3D/right.global_position)
 # ArrayMeshでマップを作成する
 func create_mesh():
 	var vertices = PackedVector3Array()
 	var normals  = PackedVector3Array()
 
 	for r in m_r2_islands:
-		add_square(vertices, normals, r.position.x, r.position.y, r.position.x + r.size.x, r.position.y + r.size.y)
+		add_square(
+			vertices,
+			normals,
+			r.position.x,
+			-(r.position.y + r.size.y),
+			r.position.x + r.size.x,
+			-r.position.y
+			)
 
-	for pos in m_v3_path_pos:
-		add_square(vertices, normals, pos.x - 0.5, pos.z - 0.5, pos.x + 0.5, pos.z + 0.5)
+	var r_m = 0.1
+	for pos in m_v3_path_left_pos:
+		add_square(
+			vertices,
+			normals,
+			pos.x - r_m,
+			pos.z + r_m,
+			pos.x + r_m,
+			pos.z - r_m)
+
+	for pos in m_v3_path_right_pos:
+		add_square(
+			vertices,
+			normals,
+			pos.x - r_m,
+			pos.z + r_m,
+			pos.x + r_m,
+			pos.z - r_m)
+	
+	var pre_v3_l = Vector3.ZERO
+	var pre_v3_r = Vector3.ZERO
+	var f_is_first = true
+	for i in range(m_v3_path_pos.size()):
+		var v3_l = m_v3_path_left_pos[i]
+		var v3_r = m_v3_path_right_pos[i]
+		if f_is_first :
+			f_is_first = false
+		else:
+			vertices.push_back(pre_v3_l)
+			vertices.push_back(pre_v3_r)
+			vertices.push_back(v3_r)
+			normals.push_back(Vector3.UP)
+			normals.push_back(Vector3.UP)
+			normals.push_back(Vector3.UP)
+
+			vertices.push_back(v3_r)
+			vertices.push_back(v3_l)
+			vertices.push_back(pre_v3_l)
+			normals.push_back(Vector3.UP)
+			normals.push_back(Vector3.UP)
+			normals.push_back(Vector3.UP)
+
+		pre_v3_l = v3_l
+		pre_v3_r = v3_r
 	
 	var arrays = Array()
 	arrays.resize(ArrayMesh.ARRAY_MAX)
@@ -131,7 +194,8 @@ func create_mesh():
 	var tmpMesh = ArrayMesh.new()
 	tmpMesh.add_surface_from_arrays(Mesh.PRIMITIVE_TRIANGLES, arrays)
 	$StageFloor.mesh = tmpMesh
-	
+	ResourceSaver.save(tmpMesh, "res://stagemesh.tres", ResourceSaver.FLAG_COMPRESS)
+
 	# MeshからCollision形状(ConcavePolygonShape3D)生成
 	$CollisionShape3D.shape = tmpMesh.create_trimesh_shape()
 
@@ -140,13 +204,22 @@ func debug_draw_line():
 
 	var pre_pos = Vector3.ZERO
 	var f_is_first = true
-	for pos in m_v3_path_pos:
+	for pos in m_v3_path_left_pos:
 		if f_is_first :
 			f_is_first = false
 		else:
-			vertices.push_back(Vector3(pre_pos.x, 0, pre_pos.z))
-			vertices.push_back(Vector3(pos.x, 0, pos.z))
+			vertices.push_back(Vector3(pre_pos.x, 1, pre_pos.z))
+			vertices.push_back(Vector3(pos.x, 1, pos.z))
+		pre_pos = pos
 
+	pre_pos = Vector3.ZERO
+	f_is_first = true
+	for pos in m_v3_path_right_pos:
+		if f_is_first :
+			f_is_first = false
+		else:
+			vertices.push_back(Vector3(pre_pos.x, 1, pre_pos.z))
+			vertices.push_back(Vector3(pos.x, 1, pos.z))
 		pre_pos = pos
 	
 	var arrays = Array()
@@ -157,8 +230,19 @@ func debug_draw_line():
 	tmpMesh.add_surface_from_arrays(Mesh.PRIMITIVE_LINES, arrays)
 	$Debug/PathLine.mesh = tmpMesh
 	
+	var material = StandardMaterial3D.new()
+	material.albedo_color = Color.RED
+	$Debug/PathLine.mesh.surface_set_material(0, material)
 func _ready():
 	create_map()
 	create_mesh()
 	debug_draw_line()
 
+var m_progress = 0.0
+var m_sign = 1.0
+func _physics_process(delta):
+	m_progress += ( delta / 100.0 * m_sign )
+	if m_progress > 0.05 or m_progress < 0:
+		m_sign = -m_sign
+		m_progress = clampf(m_progress, 0, 1)
+	$Path3D/PathFollow3D.progress_ratio = m_progress
