@@ -1,0 +1,34 @@
+[gd_scene load_steps=3 format=3 uid="uid://bloefa68dotvd"]
+
+[ext_resource type="Script" path="res://world.gd" id="1_1sopk"]
+
+[sub_resource type="Curve3D" id="Curve3D_cjd3x"]
+_data = {
+"points": PackedVector3Array(0.654097, 0, -3.08581, 0, 0, 5, -2, 0, 1, 0, 0, -5, -0.0155101, 0, 3.98314, 2, 0, -1),
+"tilts": PackedFloat32Array(0, 0)
+}
+point_count = 2
+
+[node name="World" type="Node3D"]
+script = ExtResource("1_1sopk")
+
+[node name="Camera3D" type="Camera3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, -4.37114e-08, 1, 0, -1, -4.37114e-08, 0, 5, 0)
+
+[node name="DirectionalLight3D" type="DirectionalLight3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 0.258819, 0.965926, 0, -0.965926, 0.258819, -5.94509, 0, 0)
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="."]
+
+[node name="Path3D" type="Path3D" parent="."]
+curve = SubResource("Curve3D_cjd3x")
+
+[node name="PathFollow3D" type="PathFollow3D" parent="Path3D"]
+transform = Transform3D(0.999993, 0, 0, 0, 1, 0, 0, 0, 0.999993, 2, 0, -1)
+progress = 8.422
+
+[node name="left" type="Marker3D" parent="Path3D/PathFollow3D"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.5, 0, 0)
+
+[node name="right" type="Marker3D" parent="Path3D/PathFollow3D"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.5, 0, 0)
