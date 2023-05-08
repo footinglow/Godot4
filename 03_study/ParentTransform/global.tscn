@@ -1,0 +1,19 @@
+[gd_scene load_steps=4 format=3 uid="uid://2tfvljobrper"]
+
+[ext_resource type="Script" path="res://global.gd" id="1_k56h0"]
+
+[sub_resource type="PlaneMesh" id="PlaneMesh_xdmto"]
+
+[sub_resource type="SphereMesh" id="SphereMesh_1st31"]
+
+[node name="Global" type="Node3D"]
+transform = Transform3D(-4.37114e-08, 0, 1, 0, 1, 0, -1, 0, -4.37114e-08, 0, 0, 0)
+script = ExtResource("1_k56h0")
+
+[node name="Parent" type="MeshInstance3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 2, 0, 1)
+mesh = SubResource("PlaneMesh_xdmto")
+skeleton = NodePath("")
+
+[node name="Child" type="MeshInstance3D" parent="Parent"]
+mesh = SubResource("SphereMesh_1st31")
