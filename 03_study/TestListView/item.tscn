@@ -1,4 +1,4 @@
-[gd_scene load_steps=8 format=3 uid="uid://c33faisf71gl6"]
+[gd_scene load_steps=9 format=3 uid="uid://c33faisf71gl6"]
 
 [ext_resource type="Script" path="res://item.gd" id="1_nsw80"]
 [ext_resource type="Texture2D" uid="uid://ioqsegweqx0d" path="res://assets/texture/from3D_TEXTURES/Tiles_Wall_001_basecolor.jpg" id="1_qo5o4"]
@@ -33,12 +33,15 @@ font_size = 30
 [sub_resource type="LabelSettings" id="LabelSettings_nctid"]
 font_size = 20
 
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_c053y"]
+bg_color = Color(0.282353, 0.282353, 0.282353, 1)
+
 [sub_resource type="Theme" id="Theme_a1lc5"]
 Button/font_sizes/font_size = 31
 
 [node name="Item" type="Control"]
 layout_mode = 3
-anchor_right = 0.434028
+anchor_right = 0.347222
 anchor_bottom = 0.154321
 grow_horizontal = 2
 grow_vertical = 2
@@ -72,7 +75,7 @@ grow_horizontal = 2
 grow_vertical = 2
 
 [node name="MarginContainer" type="MarginContainer" parent="Panel/Panel2/HBoxContainer"]
-custom_minimum_size = Vector2(350, 0)
+custom_minimum_size = Vector2(250, 0)
 layout_mode = 2
 theme_override_constants/margin_left = 10
 theme_override_constants/margin_top = 5
@@ -91,6 +94,7 @@ text = "Score 10000"
 label_settings = SubResource("LabelSettings_nctid")
 
 [node name="MarginContainer2" type="MarginContainer" parent="Panel/Panel2/HBoxContainer"]
+custom_minimum_size = Vector2(80, 0)
 layout_mode = 2
 size_flags_horizontal = 3
 theme_override_constants/margin_left = 20
@@ -98,9 +102,15 @@ theme_override_constants/margin_top = 20
 theme_override_constants/margin_right = 20
 theme_override_constants/margin_bottom = 20
 
-[node name="Button" type="Button" parent="Panel/Panel2/HBoxContainer/MarginContainer2"]
+[node name="Panel" type="Panel" parent="Panel/Panel2/HBoxContainer/MarginContainer2"]
 layout_mode = 2
+theme_override_styles/panel = SubResource("StyleBoxFlat_c053y")
+
+[node name="Button" type="Button" parent="Panel/Panel2/HBoxContainer/MarginContainer2/Panel"]
+layout_mode = 2
+offset_right = 106.0
+offset_bottom = 60.0
 theme = SubResource("Theme_a1lc5")
 text = "Play"
 
-[connection signal="pressed" from="Panel/Panel2/HBoxContainer/MarginContainer2/Button" to="." method="_on_button_pressed"]
+[connection signal="pressed" from="Panel/Panel2/HBoxContainer/MarginContainer2/Panel/Button" to="." method="_on_button_pressed"]
