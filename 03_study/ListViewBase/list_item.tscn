@@ -1,0 +1,97 @@
+[gd_scene load_steps=8 format=3 uid="uid://dpn1ktc7icg75"]
+
+[ext_resource type="Script" path="res://list_item.gd" id="1_c1jjc"]
+[ext_resource type="Texture2D" uid="uid://ik8xu20v61o6" path="res://assets/texture/from3D_TEXTURE/Tiles_Wall_001_basecolor.jpg" id="1_q7h7w"]
+
+[sub_resource type="StyleBoxTexture" id="StyleBoxTexture_n2qi3"]
+texture = ExtResource("1_q7h7w")
+modulate_color = Color(0.273873, 0.273873, 0.273873, 1)
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_t3prg"]
+bg_color = Color(0.6, 0.6, 0.6, 0)
+border_width_left = 2
+border_width_top = 2
+border_width_right = 2
+border_width_bottom = 2
+corner_radius_top_left = 10
+corner_radius_top_right = 10
+corner_radius_bottom_right = 10
+corner_radius_bottom_left = 10
+
+[sub_resource type="LabelSettings" id="LabelSettings_vctpd"]
+font_size = 30
+
+[sub_resource type="LabelSettings" id="LabelSettings_o7s7v"]
+font_size = 30
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_lq03s"]
+bg_color = Color(0.235294, 0.235294, 0.235294, 1)
+border_width_left = 1
+border_width_top = 1
+border_width_right = 1
+border_width_bottom = 1
+
+[node name="ListItem" type="Control"]
+custom_minimum_size = Vector2(400, 100)
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_right = -752.0
+offset_bottom = -548.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_c1jjc")
+
+[node name="PanelContainer" type="PanelContainer" parent="."]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_styles/panel = SubResource("StyleBoxTexture_n2qi3")
+metadata/_edit_use_anchors_ = true
+
+[node name="PanelContainer" type="PanelContainer" parent="PanelContainer"]
+layout_mode = 2
+theme_override_styles/panel = SubResource("StyleBoxFlat_t3prg")
+
+[node name="HBoxContainer" type="HBoxContainer" parent="PanelContainer/PanelContainer"]
+layout_mode = 2
+
+[node name="MarginContainer" type="MarginContainer" parent="PanelContainer/PanelContainer/HBoxContainer"]
+custom_minimum_size = Vector2(300, 0)
+layout_mode = 2
+theme_override_constants/margin_left = 20
+
+[node name="VBoxContainer" type="VBoxContainer" parent="PanelContainer/PanelContainer/HBoxContainer/MarginContainer"]
+layout_mode = 2
+
+[node name="LabelName" type="Label" parent="PanelContainer/PanelContainer/HBoxContainer/MarginContainer/VBoxContainer"]
+layout_mode = 2
+text = "Taro"
+label_settings = SubResource("LabelSettings_vctpd")
+
+[node name="LabelRecord" type="Label" parent="PanelContainer/PanelContainer/HBoxContainer/MarginContainer/VBoxContainer"]
+layout_mode = 2
+text = "Score 10000"
+label_settings = SubResource("LabelSettings_o7s7v")
+
+[node name="MarginContainer2" type="MarginContainer" parent="PanelContainer/PanelContainer/HBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+theme_override_constants/margin_left = 10
+theme_override_constants/margin_top = 10
+theme_override_constants/margin_right = 10
+theme_override_constants/margin_bottom = 10
+
+[node name="PanelContainer" type="PanelContainer" parent="PanelContainer/PanelContainer/HBoxContainer/MarginContainer2"]
+layout_mode = 2
+theme_override_styles/panel = SubResource("StyleBoxFlat_lq03s")
+
+[node name="Button" type="Button" parent="PanelContainer/PanelContainer/HBoxContainer/MarginContainer2/PanelContainer"]
+layout_mode = 2
+text = "Info"
+
+[connection signal="pressed" from="PanelContainer/PanelContainer/HBoxContainer/MarginContainer2/PanelContainer/Button" to="." method="_on_button_pressed"]
