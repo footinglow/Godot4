@@ -20,6 +20,7 @@ func _ready():
 	for info in m_test_list:
 		var ins = m_scn_list_item.instantiate()
 		ins.set_info(id, info[0], info[1])
+		ins.set_custom_minimum_size(Vector2(600, 200))
 		$ScrollContainer/VBoxContainer.add_child(ins)
 		id = id + 1
 		# シグナルを接続する
