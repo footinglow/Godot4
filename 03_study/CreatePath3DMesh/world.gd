@@ -49,16 +49,17 @@ func create_path_mesh(node_mesh : MeshInstance3D):
 		if f_is_first :
 			f_is_first = false
 		else:
-			vertices.push_back(pre_v3_r)
-			vertices.push_back(pre_v3_l)
+			vertices.push_back(v3_l)
 			vertices.push_back(v3_r)
+			vertices.push_back(pre_v3_r)
 			normals.push_back(Vector3.UP)
 			normals.push_back(Vector3.UP)
 			normals.push_back(Vector3.UP)
 
-			vertices.push_back(v3_l)
-			vertices.push_back(v3_r)
+
+			vertices.push_back(pre_v3_r)
 			vertices.push_back(pre_v3_l)
+			vertices.push_back(v3_l)
 			normals.push_back(Vector3.UP)
 			normals.push_back(Vector3.UP)
 			normals.push_back(Vector3.UP)
