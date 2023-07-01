@@ -24,7 +24,7 @@ transform = Transform3D(1, 0, 0, 0, 0.258819, 0.965926, 0, -0.965926, 0.258819, 
 curve = SubResource("Curve3D_cjd3x")
 
 [node name="PathFollow3D" type="PathFollow3D" parent="Path3D"]
-transform = Transform3D(0.999993, 0, 0, 0, 1, 0, 0, 0, 0.999993, 2, 0, -1)
+transform = Transform3D(-0.999993, 0, -3.89412e-07, 0, 1, 0, 3.89412e-07, 0, -0.999993, 2, 0, -1)
 progress = 8.422
 
 [node name="left" type="Marker3D" parent="Path3D/PathFollow3D"]
