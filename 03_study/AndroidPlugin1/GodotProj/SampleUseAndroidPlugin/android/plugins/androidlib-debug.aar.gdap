@@ -1,0 +1,7 @@
+[config]
+
+name="GodotExtendedPlugin"
+binary_type="local"
+binary="androidlib-debug.aar"
+
+[dependencies]
