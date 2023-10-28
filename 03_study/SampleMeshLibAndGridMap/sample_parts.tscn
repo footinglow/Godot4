@@ -1,0 +1,29 @@
+[gd_scene load_steps=5 format=3 uid="uid://3v1mmf8iibub"]
+
+[ext_resource type="PackedScene" uid="uid://bdi5jrkh2l48c" path="res://assets/SampleParts.blend" id="1_cugi2"]
+
+[sub_resource type="ConcavePolygonShape3D" id="ConcavePolygonShape3D_iguxe"]
+data = PackedVector3Array(-1, 0, 1, 1, 0, -1, 1, 0, 1, -1, 0, 1, -1, 0, -1, 1, 0, -1)
+
+[sub_resource type="ConcavePolygonShape3D" id="ConcavePolygonShape3D_gqfw1"]
+data = PackedVector3Array(-1, 0, 1, 1, 0, -1, 1, 0, 1, -1, 0, 1, -1, 0, -1, 1, 0, -1)
+
+[sub_resource type="ConcavePolygonShape3D" id="ConcavePolygonShape3D_2t631"]
+data = PackedVector3Array(-1, 0, 1, -1, 1, -1, -1, 1, 1, -1, 0, 1, -1, 0, -1, -1, 1, -1, -1, 0, -1, 1, 1, -1, -1, 1, -1, -1, 0, -1, 1, 0, -1, 1, 1, -1, 1, 0, -1, 1, 1, 1, 1, 1, -1, 1, 0, -1, 1, 0, 1, 1, 1, 1, 1, 0, 1, -1, 1, 1, 1, 1, 1, 1, 0, 1, -1, 0, 1, -1, 1, 1, -1, 0, -1, 1, 0, 1, 1, 0, -1, -1, 0, -1, -1, 0, 1, 1, 0, 1, 1, 1, -1, -1, 1, 1, -1, 1, -1, 1, 1, -1, 1, 1, 1, -1, 1, 1)
+
+[node name="SampleParts" instance=ExtResource("1_cugi2")]
+
+[node name="StaticBody3D" type="StaticBody3D" parent="Grass" index="0"]
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Grass/StaticBody3D" index="0"]
+shape = SubResource("ConcavePolygonShape3D_iguxe")
+
+[node name="StaticBody3D" type="StaticBody3D" parent="Water" index="0"]
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Water/StaticBody3D" index="0"]
+shape = SubResource("ConcavePolygonShape3D_gqfw1")
+
+[node name="StaticBody3D" type="StaticBody3D" parent="Wall" index="0"]
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Wall/StaticBody3D" index="0"]
+shape = SubResource("ConcavePolygonShape3D_2t631")
