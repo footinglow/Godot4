@@ -1,0 +1,24 @@
+[gd_scene load_steps=3 format=3 uid="uid://c71nkm2dccel6"]
+
+[sub_resource type="ConvexPolygonShape3D" id="ConvexPolygonShape3D_lvqr6"]
+points = PackedVector3Array(0, 0.5, 0.5, 0.5, -0.5, 0.5, 0, 0.5, -0.5, -0.5, -0.5, 0.5, 0.5, -0.5, -0.5, -0.5, -0.5, -0.5)
+
+[sub_resource type="PrismMesh" id="PrismMesh_rjits"]
+
+[node name="player" type="CharacterBody3D"]
+
+[node name="CollisionShape3D3" type="CollisionShape3D" parent="."]
+transform = Transform3D(0.330088, -0.173648, 0.155262, -0.478687, -3.58063e-08, 0.110392, -0.0582034, -0.984808, -0.0273768, 0.2, 0, 0)
+shape = SubResource("ConvexPolygonShape3D_lvqr6")
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="CollisionShape3D3"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 0)
+mesh = SubResource("PrismMesh_rjits")
+
+[node name="CollisionShape3D4" type="CollisionShape3D" parent="."]
+transform = Transform3D(-0.330088, 0.173648, 0.155262, -0.478687, -3.58063e-08, -0.110392, -0.0582034, -0.984808, 0.0273768, -0.2, 0, 0)
+shape = SubResource("ConvexPolygonShape3D_lvqr6")
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="CollisionShape3D4"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 0)
+mesh = SubResource("PrismMesh_rjits")

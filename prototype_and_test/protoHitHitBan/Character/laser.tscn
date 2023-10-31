@@ -1,0 +1,34 @@
+[gd_scene load_steps=5 format=3 uid="uid://byc0v26ljh4qh"]
+
+[ext_resource type="Script" path="res://Character/laser.gd" id="1_x50v8"]
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_yyx48"]
+size = Vector3(1, 0.5, 1)
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_e7g40"]
+albedo_color = Color(0.933333, 0.933333, 0, 1)
+emission_enabled = true
+emission = Color(0.764706, 0.67451, 0, 1)
+
+[sub_resource type="CapsuleMesh" id="CapsuleMesh_wmube"]
+material = SubResource("StandardMaterial3D_e7g40")
+radius = 0.05
+height = 1.0
+
+[node name="laser" type="Area3D" groups=["LASER"]]
+script = ExtResource("1_x50v8")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="."]
+shape = SubResource("BoxShape3D_yyx48")
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, -4.37114e-08, -1, 0, 1, -4.37114e-08, 0.4, 0, 0)
+mesh = SubResource("CapsuleMesh_wmube")
+
+[node name="MeshInstance3D2" type="MeshInstance3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, -4.37114e-08, -1, 0, 1, -4.37114e-08, -0.4, 0, 0)
+mesh = SubResource("CapsuleMesh_wmube")
+
+[node name="VisibleOnScreenNotifier3D" type="VisibleOnScreenNotifier3D" parent="."]
+
+[connection signal="screen_exited" from="VisibleOnScreenNotifier3D" to="." method="_on_visible_on_screen_notifier_3d_screen_exited"]

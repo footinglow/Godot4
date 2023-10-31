@@ -1,0 +1,50 @@
+[gd_scene load_steps=8 format=3 uid="uid://cq24u2l8nf02s"]
+
+[ext_resource type="Script" path="res://GameSystem/HUD.gd" id="1_72qe0"]
+[ext_resource type="Script" path="res://GameSystem/game.gd" id="2_prc40"]
+[ext_resource type="PackedScene" uid="uid://byc0v26ljh4qh" path="res://Character/laser.tscn" id="3_ire0t"]
+[ext_resource type="PackedScene" uid="uid://c71nkm2dccel6" path="res://Character/player.tscn" id="3_p6fd1"]
+[ext_resource type="PackedScene" uid="uid://djpjn3frvsxeh" path="res://Character/balloon.tscn" id="5_8fj36"]
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_0s7e1"]
+albedo_color = Color(0.937255, 0.717647, 0.615686, 1)
+
+[sub_resource type="BoxMesh" id="BoxMesh_axk17"]
+material = SubResource("StandardMaterial3D_0s7e1")
+size = Vector3(100, 1, 100)
+
+[node name="HUD" type="Control"]
+layout_mode = 3
+anchors_preset = 0
+offset_right = 40.0
+offset_bottom = 40.0
+script = ExtResource("1_72qe0")
+
+[node name="game" type="Node3D" parent="."]
+script = ExtResource("2_prc40")
+m_scn_laser = ExtResource("3_ire0t")
+
+[node name="player" parent="game" instance=ExtResource("3_p6fd1")]
+
+[node name="Camera3D" type="Camera3D" parent="game"]
+transform = Transform3D(1, 0, 0, 0, 0.524001, 0.851718, 0, -0.851718, 0.524001, 0, 5.91929, 0.0366554)
+
+[node name="DirectionalLight3D" type="DirectionalLight3D" parent="game"]
+transform = Transform3D(1, 0, 0, 0, -0.707107, 0.707107, 0, -0.707107, -0.707107, -4, 0, 0)
+shadow_enabled = true
+
+[node name="StaticBody3D" type="StaticBody3D" parent="game"]
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="game/StaticBody3D"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -1, 0)
+mesh = SubResource("BoxMesh_axk17")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="game/StaticBody3D"]
+
+[node name="balloon" parent="game" instance=ExtResource("5_8fj36")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 2.21091, 0, -8.47515)
+
+[node name="balloon2" parent="game" instance=ExtResource("5_8fj36")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -1.65818, 0, -6.08)
+
+[connection signal="sig_to_hud_drag_line" from="game" to="." method="_on_game_sig_to_hud_drag_line"]
