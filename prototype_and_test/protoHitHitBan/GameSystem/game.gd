@@ -1,7 +1,5 @@
 extends Node3D
 
-signal sig_to_hud_drag_line(touch_pos, drag_pos)
-
 # Player
 @export var m_speed_mps = 3.0
 @export var m_scn_laser : PackedScene
@@ -42,25 +40,21 @@ func _input(event):
 
 func _physics_process(delta):
 	if m_f_is_screen_touch:
-		var v_dir = Vector3.ZERO
-		if g_c_.m_ui_kind == g_c_.UI_KIND.TOUCH_PAD:	
-			# 中心からタッチ位置の計算
-			var diff_x_px = m_drag_pos.x - g_c_.m_v2_ui_center_pos.x
-			var diff_y_px = m_drag_pos.y - g_c_.m_v2_ui_center_pos.y
-			# 移動方向を設定
-			v_dir = Vector3(diff_x_px, 0, diff_y_px).normalized()
-			# Playerの移動	
-			$player.velocity = v_dir * m_speed_mps
-			$player.move_and_slide()
-		elif g_c_.m_ui_kind == g_c_.UI_KIND.DRAG_TO_MOVE:
-			var camera = get_viewport().get_camera_3d()
-			var v_touch_pos = camera.project_position(m_touch_pos, camera.global_position.y)
-			var v_drag_pos  = camera.project_position(m_drag_pos,  camera.global_position.y)
-			v_touch_pos.y = 0
-			v_drag_pos.y = 0
-			$player.global_position = m_v_base_player_pos + ( v_drag_pos - v_touch_pos )
-		else:
-			pass
+		# ドラッグ開始位置と、現在の位置を3D空間上の大体の位置に変換する
+		# 斜めに見下ろしている構図の場合、project_positionのZposには、カメラのY座標と角度からcosで割った値を設定する
+		# またスマホの手前のZposより奥のZposの方が長いので、タッチ座標のYの位置によってもproject_positionのZposの計算が必要
+		var camera = get_viewport().get_camera_3d()
+		var v_touch_pos = camera.project_position(m_touch_pos, camera.global_position.y)
+		var v_drag_pos  = camera.project_position(m_drag_pos,  camera.global_position.y)
+		v_touch_pos.y = 0	# Y軸方向には移動しないので０にする
+		v_drag_pos.y = 0	# Y軸方向には移動しないので０にする
+		
+		# ３D空間の移動先目標位置
+		var v_target_pos = m_v_base_player_pos + ( v_drag_pos - v_touch_pos )
+		
+		# delta時間で目標位置に移動できる速度を設定してmove_and_slideする（本当はPlayerシーン内でやるべき）
+		$player.velocity =  (v_target_pos - $player.global_position ) / delta
+		$player.move_and_slide()
 		
 		# タイミングをとりながらlaser発射
 		if m_firing_remain_time_sec > 0:
@@ -73,8 +67,5 @@ func _physics_process(delta):
 			# 発射間隔を設定
 			m_firing_remain_time_sec = m_firing_interval_sec
 		
-		# HUDに送信
-		sig_to_hud_drag_line.emit(g_c_.m_v2_ui_center_pos, m_drag_pos)
 	else:
-		# HUDに送信
-		sig_to_hud_drag_line.emit(g_c_.m_v2_ui_center_pos, g_c_.m_v2_ui_center_pos)
+		pass
