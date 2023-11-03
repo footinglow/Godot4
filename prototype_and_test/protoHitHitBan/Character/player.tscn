@@ -12,7 +12,6 @@ transform = Transform3D(0.330088, -0.173648, 0.155262, -0.478687, -3.58063e-08, 
 shape = SubResource("ConvexPolygonShape3D_lvqr6")
 
 [node name="MeshInstance3D" type="MeshInstance3D" parent="CollisionShape3D3"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 0)
 mesh = SubResource("PrismMesh_rjits")
 
 [node name="CollisionShape3D4" type="CollisionShape3D" parent="."]
@@ -20,5 +19,4 @@ transform = Transform3D(-0.330088, 0.173648, 0.155262, -0.478687, -3.58063e-08, 
 shape = SubResource("ConvexPolygonShape3D_lvqr6")
 
 [node name="MeshInstance3D" type="MeshInstance3D" parent="CollisionShape3D4"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 0)
 mesh = SubResource("PrismMesh_rjits")
