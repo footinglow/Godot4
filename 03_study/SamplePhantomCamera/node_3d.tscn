@@ -1,0 +1,65 @@
+[gd_scene load_steps=9 format=3 uid="uid://c5ij4j75cb700"]
+
+[ext_resource type="Script" path="res://CharacterBody3D.gd" id="1_8derl"]
+[ext_resource type="Script" path="res://addons/phantom_camera/scripts/phantom_camera_host/phantom_camera_host.gd" id="1_n4yf7"]
+[ext_resource type="Script" path="res://addons/phantom_camera/scripts/phantom_camera/phantom_camera_3D.gd" id="2_wjxnf"]
+
+[sub_resource type="CapsuleMesh" id="CapsuleMesh_h00vp"]
+
+[sub_resource type="CapsuleShape3D" id="CapsuleShape3D_n02ge"]
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_edfba"]
+albedo_color = Color(0.0509804, 0.913725, 0.568627, 1)
+
+[sub_resource type="BoxMesh" id="BoxMesh_4myqg"]
+material = SubResource("StandardMaterial3D_edfba")
+size = Vector3(10, 1, 10)
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_ph8vv"]
+size = Vector3(10, 1, 10)
+
+[node name="Node3D" type="Node3D"]
+
+[node name="CharacterBody3D" type="CharacterBody3D" parent="."]
+script = ExtResource("1_8derl")
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="CharacterBody3D"]
+mesh = SubResource("CapsuleMesh_h00vp")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="CharacterBody3D"]
+shape = SubResource("CapsuleShape3D_n02ge")
+
+[node name="StaticBody3D" type="StaticBody3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -1, 0)
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="StaticBody3D"]
+mesh = SubResource("BoxMesh_4myqg")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="StaticBody3D"]
+shape = SubResource("BoxShape3D_ph8vv")
+
+[node name="Camera3D" type="Camera3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 5)
+
+[node name="PhantomCameraHost" type="Node" parent="Camera3D"]
+script = ExtResource("1_n4yf7")
+
+[node name="DirectionalLight3D" type="DirectionalLight3D" parent="."]
+transform = Transform3D(0.707107, 0.5, -0.5, 0, 0.707107, 0.707107, 0.707107, -0.5, 0.5, 0, 0, 0)
+shadow_enabled = true
+
+[node name="PhantomCamera3D" type="Node3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 5)
+script = ExtResource("2_wjxnf")
+priority_override = false
+priority = 0
+follow_mode = 2
+follow_target = NodePath("../CharacterBody3D")
+follow_parameters/target_offset = Vector3(0, 0, 5)
+follow_parameters/damping = true
+follow_parameters/damping_value = 2.0
+look_at_mode = 0
+tween_parameters = null
+tween_on_load = true
+inactive_update_mode = 0
+camera_3D_resource = null
