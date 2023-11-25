@@ -1,0 +1,29 @@
+[gd_scene load_steps=6 format=3 uid="uid://cxyqg7a5mism"]
+
+[ext_resource type="Script" path="res://Character/enemy/EnemyBullet.gd" id="1_ja2ll"]
+[ext_resource type="Texture2D" uid="uid://bjq3bpodbkpyq" path="res://assets/blender/EnemyBullet/EnemyBullet.png" id="2_8hwao"]
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_2kbkv"]
+transparency = 1
+albedo_texture = ExtResource("2_8hwao")
+disable_receive_shadows = true
+billboard_keep_scale = true
+
+[sub_resource type="QuadMesh" id="QuadMesh_v2mn5"]
+material = SubResource("StandardMaterial3D_2kbkv")
+
+[sub_resource type="SphereShape3D" id="SphereShape3D_1dxty"]
+radius = 0.08
+
+[node name="EnemyBullet" type="Area3D"]
+script = ExtResource("1_ja2ll")
+_d_speed_degps = 360
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="."]
+transform = Transform3D(0.3, 0, 0, 0, -1.83588e-08, 0.3, 0, -0.42, -1.31134e-08, 0, 0, 0)
+cast_shadow = 0
+lod_bias = 0.85
+mesh = SubResource("QuadMesh_v2mn5")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="."]
+shape = SubResource("SphereShape3D_1dxty")

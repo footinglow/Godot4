@@ -1,16 +1,25 @@
-[gd_scene load_steps=7 format=3 uid="uid://cq24u2l8nf02s"]
+[gd_scene load_steps=13 format=3 uid="uid://cq24u2l8nf02s"]
 
 [ext_resource type="Script" path="res://GameSystem/game.gd" id="2_prc40"]
 [ext_resource type="PackedScene" uid="uid://byc0v26ljh4qh" path="res://Character/laser.tscn" id="3_ire0t"]
 [ext_resource type="PackedScene" uid="uid://c71nkm2dccel6" path="res://Character/player.tscn" id="3_p6fd1"]
 [ext_resource type="PackedScene" uid="uid://djpjn3frvsxeh" path="res://Character/balloon.tscn" id="5_8fj36"]
+[ext_resource type="PackedScene" uid="uid://dhb4qxdaxjfbp" path="res://Character/enemy/twin_body.tscn" id="5_qaclf"]
+[ext_resource type="Texture2D" uid="uid://cs10e4feps6jy" path="res://assets/NASA/starmap_2020_4k.exr" id="6_tqcls"]
+[ext_resource type="Script" path="res://GameSystem/WorldEnvironment.gd" id="7_mh4jg"]
+[ext_resource type="PackedScene" uid="uid://cxyqg7a5mism" path="res://Character/enemy/EnemyBullet.tscn" id="8_sprej"]
+[ext_resource type="PackedScene" uid="uid://ckga7a8hbtb3v" path="res://assets/blender/BossStage1/BossStage1.glb" id="9_a8cmj"]
 
-[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_0s7e1"]
-albedo_color = Color(0.937255, 0.717647, 0.615686, 1)
+[sub_resource type="PanoramaSkyMaterial" id="PanoramaSkyMaterial_6ku8j"]
+panorama = ExtResource("6_tqcls")
 
-[sub_resource type="BoxMesh" id="BoxMesh_axk17"]
-material = SubResource("StandardMaterial3D_0s7e1")
-size = Vector3(100, 1, 100)
+[sub_resource type="Sky" id="Sky_p73t3"]
+sky_material = SubResource("PanoramaSkyMaterial_6ku8j")
+
+[sub_resource type="Environment" id="Environment_hswpm"]
+background_mode = 2
+sky = SubResource("Sky_p73t3")
+sky_custom_fov = 44.5
 
 [node name="game" type="Node3D"]
 script = ExtResource("2_prc40")
@@ -19,22 +28,33 @@ m_scn_laser = ExtResource("3_ire0t")
 [node name="player" parent="." instance=ExtResource("3_p6fd1")]
 
 [node name="Camera3D" type="Camera3D" parent="."]
-transform = Transform3D(1, 0, 0, 0, 0.524001, 0.851718, 0, -0.851718, 0.524001, 0, 5.91929, 0.0366554)
+transform = Transform3D(1, 0, 0, 0, 0.5, 0.866026, 0, -0.866026, 0.5, 0, 6, 0)
 
 [node name="DirectionalLight3D" type="DirectionalLight3D" parent="."]
-transform = Transform3D(1, 0, 0, 0, -0.707107, 0.707107, 0, -0.707107, -0.707107, -4, 0, 0)
+transform = Transform3D(1, 0, 0, 0, 0.441897, 0.897066, 0, -0.897066, 0.441897, -4, 0, 0)
 shadow_enabled = true
-
-[node name="StaticBody3D" type="StaticBody3D" parent="."]
-
-[node name="MeshInstance3D" type="MeshInstance3D" parent="StaticBody3D"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -1, 0)
-mesh = SubResource("BoxMesh_axk17")
-
-[node name="CollisionShape3D" type="CollisionShape3D" parent="StaticBody3D"]
 
 [node name="balloon" parent="." instance=ExtResource("5_8fj36")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 2.21091, 0, -8.47515)
 
 [node name="balloon2" parent="." instance=ExtResource("5_8fj36")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -1.65818, 0, -6.08)
+
+[node name="twin_body" parent="." instance=ExtResource("5_qaclf")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1.81872, 0, -13.1208)
+
+[node name="twin_body2" parent="." instance=ExtResource("5_qaclf")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -1.88368, 0, -3.25306)
+
+[node name="WorldEnvironment" type="WorldEnvironment" parent="."]
+environment = SubResource("Environment_hswpm")
+script = ExtResource("7_mh4jg")
+
+[node name="EnemyBullet" parent="." instance=ExtResource("8_sprej")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 2, 0, -4)
+
+[node name="EnemyBullet2" parent="." instance=ExtResource("8_sprej")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -13)
+
+[node name="BossStage1" parent="." instance=ExtResource("9_a8cmj")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -9.28729)

@@ -1,10 +1,9 @@
 [gd_scene load_steps=7 format=3 uid="uid://djpjn3frvsxeh"]
 
 [ext_resource type="Script" path="res://Character/balloon.gd" id="1_n1q47"]
+[ext_resource type="PackedScene" uid="uid://c7e0eqp6qhyen" path="res://assets/blender/asteroid/asteroid.glb" id="2_wk78r"]
 
 [sub_resource type="SphereShape3D" id="SphereShape3D_4aqgb"]
-
-[sub_resource type="SphereMesh" id="SphereMesh_xjfg7"]
 
 [sub_resource type="SphereShape3D" id="SphereShape3D_ye655"]
 
@@ -37,9 +36,7 @@ shape = SubResource("SphereShape3D_4aqgb")
 
 [node name="design" type="Node3D" parent="."]
 
-[node name="MeshInstance3D" type="MeshInstance3D" parent="design"]
-mesh = SubResource("SphereMesh_xjfg7")
-skeleton = NodePath("../..")
+[node name="asteroid" parent="design" instance=ExtResource("2_wk78r")]
 
 [node name="sensor_laser" type="Area3D" parent="."]
 

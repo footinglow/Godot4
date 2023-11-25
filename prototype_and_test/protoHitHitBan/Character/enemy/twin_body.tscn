@@ -1,0 +1,10 @@
+[gd_scene load_steps=3 format=3 uid="uid://dhb4qxdaxjfbp"]
+
+[ext_resource type="Script" path="res://Character/enemy/twin_body.gd" id="1_b11lq"]
+[ext_resource type="PackedScene" uid="uid://karep1cxpgxj" path="res://assets/blender/twin_body/twin_body.glb" id="1_c7agh"]
+
+[node name="twin_body" type="CharacterBody3D"]
+script = ExtResource("1_b11lq")
+
+[node name="twin_body" parent="." instance=ExtResource("1_c7agh")]
+transform = Transform3D(0.2, 0, 0, 0, 0.2, 0, 0, 0, 0.2, 0, 0, 0)

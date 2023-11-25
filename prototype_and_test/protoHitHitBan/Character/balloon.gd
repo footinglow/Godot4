@@ -4,7 +4,6 @@ extends CharacterBody3D
 
 var m_d_balloon_size = 1.0
 
- 
 func _on_sensor_laser_area_entered(area_laser):
 	if area_laser.is_in_group("LASER"):
 		# balloonを大きくする
